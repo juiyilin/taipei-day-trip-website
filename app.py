@@ -46,7 +46,7 @@ def get_attraction():
 		data=list(mycursor)
 		column_names=mycursor.column_names #tuple
 		spots=[]
-		print(data)
+		# print(data)
 		for i in range(len(data)):
 			dt=list(data[i])
 			spot=spot_handle(dt,column_names)
