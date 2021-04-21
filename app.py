@@ -36,9 +36,10 @@ def get_attraction():
 	keyword=request.args.get('keyword','')
 	try:
 		page=int(page)								
-		select=f'{select_spot} where id between {page*12+1} and {(page+1)*12}'
+		select=select_spot
 		if keyword!='':
-			select+=f' and name like "%{keyword}%"'
+			select+=f' where name like "%{keyword}%"'
+		select+=f' order by id limit {page*12}, 12'
 		mycursor.execute(select)
 	except:
 		abort(500)
@@ -47,13 +48,18 @@ def get_attraction():
 		column_names=mycursor.column_names #tuple
 		spots=[]
 		# print(data)
-		for i in range(len(data)):
+		num_data=len(data)
+		for i in range(num_data):
 			dt=list(data[i])
 			spot=spot_handle(dt,column_names)
 			spots.append(spot)
 			
 		result['data']=spots #data:[{spot1},{spot2}]
-		result['nextPage']=1
+		if num_data<12:
+			next_page=None
+		else:
+			next_page=page+1
+		result['nextPage']=next_page
 		return jsonify(result),200
 	
 
@@ -107,4 +113,4 @@ def server_error(error):
     
     
 
-app.run(host="0.0.0.0", port=3000,debug=True)
+app.run(host="0.0.0.0", port=3000)#,debug=True)
