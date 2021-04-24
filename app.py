@@ -1,6 +1,7 @@
 from flask import *
 import jinja2
 import mysql.connector 
+from mysql.connector import errors
 from data.dbconfig import user,password
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
@@ -44,6 +45,8 @@ def get_attraction():
 			select+=f' where name like "%{keyword}%"'
 		select+=f' order by id limit {page*12}, 12'
 		mycursor.execute(select)
+	except errors.Error:
+		return errors.Error.errno
 	except:
 		abort(500)
 	else:
@@ -78,6 +81,8 @@ def get_attraction_by_id(attractionid):
 	try:
 		mycursor.execute(select)
 		data=list(list(mycursor)[0])
+	except errors.Error:
+		return errors.Error.errno
 	except:
 		abort(500)
 	else:
@@ -111,7 +116,7 @@ def input_error(error):
 def server_error(error):
 	result={}
 	result['error']=True
-	result['message']='伺服器錯誤'
+	result['message']='伺服器錯誤:'+error
 	return jsonify(result),500
     
     
