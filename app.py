@@ -6,11 +6,14 @@ app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 
+
 db=mysql.connector.connect(
 	host='localhost',
-	user=user,
-	password=password,
-	database='taipeispot'
+	user=user, 
+	password=password, # change config when upload
+	database='taipeispot',
+	pool_name='my_connection_pool',
+	pool_size=1
 )
 mycursor = db.cursor()
 select_spot='select * from spot'
@@ -55,7 +58,7 @@ def get_attraction():
 			spots.append(spot)
 			
 		result['data']=spots #data:[{spot1},{spot2}]
-		if num_data<12:
+		if num_data<=12:
 			next_page=None
 		else:
 			next_page=page+1
@@ -113,4 +116,4 @@ def server_error(error):
     
     
 
-app.run(host="0.0.0.0", port=3000)#,debug=True)
+app.run(host="localhost", port=3000)#,debug=True)
