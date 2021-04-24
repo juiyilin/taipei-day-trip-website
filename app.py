@@ -68,9 +68,11 @@ def get_attraction():
 		result['nextPage']=next_page
 		return jsonify(result),200
 	
-
+@app.route('/api/attraction/',defaults={'attractionid':''})
 @app.route('/api/attraction/<attractionid>')
 def get_attraction_by_id(attractionid):
+	if attractionid=='' or attractionid=='0':
+		return redirect('/api/attraction/1')
 	try:
 		attractionid=int(attractionid)
 	except:
@@ -116,7 +118,7 @@ def input_error(error):
 def server_error(error):
 	result={}
 	result['error']=True
-	result['message']='伺服器錯誤:'+error
+	result['message']='伺服器錯誤:'+str(error)
 	return jsonify(result),500
     
     
