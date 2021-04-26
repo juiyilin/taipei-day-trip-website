@@ -47,7 +47,7 @@ def get_attraction():
 	except mysql.connector.Error as err:
 		db.close()
 		#db = mysql.connector.connect(pool_name='my_connection_pool')
-		return err.errno #2006
+		return str(err.errno) #2006
 
 	except:
 		abort(500)
