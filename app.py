@@ -1,7 +1,6 @@
 from flask import *
 import jinja2
 import mysql.connector 
-from mysql.connector import errors
 from data.dbconfig import user,password
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
@@ -45,8 +44,11 @@ def get_attraction():
 			select+=f' where name like "%{keyword}%"'
 		select+=f' order by id limit {page*12}, 12'
 		mycursor.execute(select)
-	except errors.Error:
-		return errors.Error.errno
+	except mysql.connector.Error as err:
+		db.close()
+		#db = mysql.connector.connect(pool_name='my_connection_pool')
+		return err.errno #2006
+
 	except:
 		abort(500)
 	else:
@@ -83,8 +85,8 @@ def get_attraction_by_id(attractionid):
 	try:
 		mycursor.execute(select)
 		data=list(list(mycursor)[0])
-	except errors.Error:
-		return errors.Error.errno
+	except mysql.connector.Error as err:
+		return str(err.errno)
 	except:
 		abort(500)
 	else:
@@ -104,7 +106,6 @@ def spot_handle(data,column_names):
 	for key,d in zip(column_names,data):
 		spot[key]=d
 	return spot
-
 
 # error handle
 @app.errorhandler(400)
