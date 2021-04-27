@@ -13,7 +13,7 @@ db=mysql.connector.connect(
 	password=password, # change config when upload
 	database='taipeispot',
 	pool_name='my_connection_pool',
-	pool_size=1
+	pool_size=2
 )
 mycursor = db.cursor()
 select_spot='select * from spot'
@@ -47,7 +47,7 @@ def get_attraction():
 	except mysql.connector.Error as err:
 		
 		db.close()
-		db = mysql.connector.connect(pool_name='my_connection_pool')
+		db2 = mysql.connector.connect(pool_name='my_connection_pool')
 		
 
 	except:
@@ -88,7 +88,7 @@ def get_attraction_by_id(attractionid):
 		data=list(list(mycursor)[0])
 	except mysql.connector.Error as err:
 		db.close()
-		db = mysql.connector.connect(pool_name='my_connection_pool')
+		db2 = mysql.connector.connect(pool_name='my_connection_pool')
 	except:
 		abort(500)
 	else:
