@@ -45,9 +45,10 @@ def get_attraction():
 		select+=f' order by id limit {page*12}, 12'
 		mycursor.execute(select)
 	except mysql.connector.Error as err:
+		
 		db.close()
-		#db = mysql.connector.connect(pool_name='my_connection_pool')
-		return str(err.errno) #2006
+		db = mysql.connector.connect(pool_name='my_connection_pool')
+		
 
 	except:
 		abort(500)
@@ -63,7 +64,7 @@ def get_attraction():
 			spots.append(spot)
 			
 		result['data']=spots #data:[{spot1},{spot2}]
-		if num_data<=12:
+		if num_data<12:
 			next_page=None
 		else:
 			next_page=page+1
@@ -86,7 +87,8 @@ def get_attraction_by_id(attractionid):
 		mycursor.execute(select)
 		data=list(list(mycursor)[0])
 	except mysql.connector.Error as err:
-		return str(err.errno)
+		db.close()
+		db = mysql.connector.connect(pool_name='my_connection_pool')
 	except:
 		abort(500)
 	else:
@@ -124,4 +126,4 @@ def server_error(error):
     
     
 
-app.run(host="0.0.0.0", port=3000)#,debug=True)
+app.run(host="localhost", port=3000,debug=True)
