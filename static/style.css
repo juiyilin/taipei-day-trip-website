@@ -20,6 +20,8 @@ p,
 
 .width {
     width: 1200px;
+    position: relative;
+
 }
 
 /* login block  */
@@ -56,12 +58,15 @@ p,
 }
 
 /* end login block */
+
+/* nav */
 #nav-bgcolor {
     background-color: #ffffff;
     height: 50px;
     width: 100%;
     position: fixed;
     top: 0;
+    z-index: 100;
 }
 
 nav {
@@ -74,30 +79,37 @@ nav {
     color: #448899;
     font-size: 30px;
     font-weight: bold;
+    padding: 0 10px;
+
 }
 
 #top-right {
     list-style-type: none;
     display: flex;
+    color: #666666;
 }
 
 #top-right li {
     padding: 0 10px;
 }
 
+/* end nav */
+
+/* banner */
 .banner {
     height: 320px;
     width: 100%;
-    background-color: steelblue;
+    background: linear-gradient(135deg, #AADDEE 0%, #66AABB 100%);
     margin-top: 50px;
     align-items: center;
+
 }
 
 #banner-text {
     height: 150px;
     padding: 0 10px;
     width: 100%;
-    color: white;
+    color: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -105,34 +117,193 @@ nav {
 
 #banner-title {
     font-size: 28px;
-    font-family: Noto Sans;
+    font-family: 'Noto Sans';
     font-weight: bold;
     line-height: 46px;
+    z-index: 2;
+
+}
+
+#banner-slogan {
+    z-index: 2;
+
+}
+
+#search-block {
+    display: flex;
+    z-index: 2;
+
 }
 
 #spot-name-search {
     width: 400px;
     height: 46px;
-    border-radius: 5px;
+    border-radius: 5px 0 0 5px;
     border: transparent solid 1px;
+    z-index: 2;
+    font-size: 16px;
+
 }
 
-.article {
-    margin: 30px 0;
-    padding: 0 20px;
+#search-icon {
+    width: 60px;
+    height: 46px;
+    background-color: #448899;
+    border-radius: 0 5px 5px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: #448899 solid 2px;
+    z-index: 2;
+
+}
+
+#welcome {
+    position: absolute;
+    top: -85px;
+    right: 0;
+    z-index: 1;
+}
+
+/* end banner */
+
+/* content */
+#content {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    margin: 50px auto;
+}
+
+.card {
+    border: 1px solid #e8e8e8;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.img {
+    height: 70%;
+    width: 100%;
+}
+
+.img img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px 5px 0 0;
+}
+
+
+.card-info {
+    width: 95%;
+    height: 30%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+
+}
+
+.card-name {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 50%;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #757575;
+}
+
+.mrt {
+    height: 50%;
+    width: 50%;
+    color: #757575;
+    display: flex;
+    align-items: center;
+}
+
+.category {
+    height: 50%;
+    width: 50%;
+    color: #757575;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* end content */
+
+
+
+
+@media (min-width:1200px) {
+    .card {
+        width: 270px;
+        height: 250px;
+        margin: 10px;
+    }
+}
+
+@media (max-width:1200px) {
+    .card {
+        width: 38%;
+        margin: 10px;
+    }
+}
+
+/* m size */
+@media (max-width:960px) {
+    #welcome {
+        width: 450px;
+        top: 14px;
+    }
+
+    #content {
+        width: 90%;
+        justify-content: space-evenly;
+    }
+
+    .card {
+        width: 40%;
+        margin-bottom: 20px;
+        object-fit: cover;
+        max-height: 250px;
+    }
+}
+
+/* s size */
+@media(max-width:600px) {
+    #welcome {
+        width: 300px;
+        top: 88px;
+        right: -10px;
+    }
+
+    #spot-name-search {
+        width: 230px;
+        height: 46px;
+    }
+
+    .card {
+        width: 100%;
+        object-fit: cover;
+        max-height: 600px;
+        min-height: 300px;
+    }
 }
 
 footer {
     height: 100px;
-    background-color: rgb(0, 0, 0);
+    background-color: #000000;
     display: flex;
     width: 100%;
     align-items: center;
 }
 
 footer p {
-    color: white;
+    color: #ffffff;
     font-weight: bold;
+    font-family: 'Noto Sans';
 }
-
-@media (max-width:1200px)

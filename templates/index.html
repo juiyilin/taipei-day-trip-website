@@ -1,2 +1,68 @@
-{% extends 'nav-footer.html'%}
-{% block content %}{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>Taipei-Day-Trip</title>
+</head>
+
+
+<body id='when-login'>
+
+
+    <div class="container" id="nav-bgcolor">
+        <nav class="width">
+            <div id="top-left"> 台北一日遊</div>
+            <div id="top-right">
+                <li>預定行程</li>
+                <li>登入/註冊</li>
+            </div>
+        </nav>
+    </div>
+    <div class="container banner">
+        <div class="width">
+            <img id="welcome" src="../static/img/welcome 1.png" alt="">
+            <div id="banner-text">
+                <p id="banner-title">輕鬆享受台北一日悠閒</p>
+                <p id="banner-slogan">探索每個角落，體驗城市的深度旅遊行程</p>
+                <div id="search-block">
+                    <input type="text" name="spot-name-search" id="spot-name-search" placeholder="輸入景點名稱查詢">
+                    <div id="search-icon">
+                        <input type="image" src="../static/img/icon_search.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="width" id="content">
+            <!-- <div class="card">
+                <div class="img">
+                    <img src="https://picsum.photos/id/866/1000/600" alt="">
+                </div>
+                <div class="card-info">
+                    <div class="card-name">名稱</div>
+                    <div class="mrt">捷運</div>
+                    <div class="category">類型</div>
+                </div>
+            </div> -->
+
+        </div>
+    </div>
+    <footer class="container">
+        <p>COPYRIGHT © 2021 台北一日遊</p>
+    </footer>
+</body>
+<!-- <div id="login-block">
+    <div id="login-text">登入會員帳號</div>
+    <input type="text" name="" id="" class="login">
+    <input type="text" name="" id="" class="login">
+    <button class="login" id="login-btn">登入帳戶</button>
+    <div id="no-account"></div>
+</div> -->
+<script src="../static/getData.js"></script>
+
+</html>

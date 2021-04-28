@@ -38,18 +38,19 @@ def get_attraction():
 	page=request.args.get('page','')
 	keyword=request.args.get('keyword','')
 	try:
-		page=int(page)								
+		page=int(page)					
+		# 筆數			
+		mycursor.execute(f'select count(*) from spot where name like "%{keyword}%"')
+		num=mycursor.fetchone()[0]
+		
 		select=select_spot
 		if keyword!='':
 			select+=f' where name like "%{keyword}%"'
 		select+=f' order by id limit {page*12}, 12'
 		mycursor.execute(select)
-	except mysql.connector.Error as err:
-		
+	except mysql.connector.errors.PoolError:
 		db.close()
 		db2 = mysql.connector.connect(pool_name='my_connection_pool')
-		
-
 	except:
 		abort(500)
 	else:
@@ -64,10 +65,10 @@ def get_attraction():
 			spots.append(spot)
 			
 		result['data']=spots #data:[{spot1},{spot2}]
-		if num_data<12:
-			next_page=None
-		else:
+		if num-(page*12+num_data)>0:
 			next_page=page+1
+		else:
+			next_page=None
 		result['nextPage']=next_page
 		return jsonify(result),200
 	
@@ -86,7 +87,7 @@ def get_attraction_by_id(attractionid):
 	try:
 		mycursor.execute(select)
 		data=list(list(mycursor)[0])
-	except mysql.connector.Error as err:
+	except mysql.connector.errors.PoolError:
 		db.close()
 		db2 = mysql.connector.connect(pool_name='my_connection_pool')
 	except:
@@ -94,7 +95,6 @@ def get_attraction_by_id(attractionid):
 	else:
 		column_names=mycursor.column_names #tuple
 		spot=spot_handle(data,column_names)
-			
 		result['data']=spot #data:{spot}
 	return jsonify(result),200
 
@@ -126,4 +126,4 @@ def server_error(error):
     
     
 
-app.run(host="localhost", port=3000,debug=True)
+app.run(host="0.0.0.0", port=3000)#,debug=True)
