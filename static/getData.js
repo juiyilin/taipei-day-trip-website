@@ -5,7 +5,6 @@ async function getData(page, keyword) {
         if (keyword === '') {
             res = await fetch(`${url}?page=${page}`);
         } else {
-            console.log(keyword);
             res = await fetch(`${url}?page=${page}&keyword=${keyword}`);
         }
         jsonData = await res.json();
@@ -47,7 +46,13 @@ function appendContent(data) {
 
             let cardMrt = document.createElement('div');
             cardMrt.className = 'mrt';
-            let mrt = document.createTextNode(data.data[i].mrt);
+            if (data.data[i].mrt !== null) {
+                mrt = document.createTextNode(data.data[i].mrt);
+            } else {
+                mrt = document.createTextNode('其他');
+
+            }
+
             cardMrt.appendChild(mrt);
 
             let cardCategory = document.createElement('div');
@@ -108,7 +113,7 @@ searchIcon.addEventListener('click', function () {
     removeContent();
     nextPage = '0';
     keyword = document.getElementById('spot-name-search').value;
-    console.log(keyword);
+    // console.log(keyword);
     getData(nextPage, keyword);
 })
 
