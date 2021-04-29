@@ -6,11 +6,14 @@ app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 
+
 db=mysql.connector.connect(
 	host='localhost',
-	user=user,
-	password=password,
-	database='taipeispot'
+	user=user, 
+	password=password, # change config when upload
+	database='taipeispot',
+	pool_name='my_connection_pool',
+	pool_size=2
 )
 mycursor = db.cursor()
 select_spot='select * from spot'
@@ -35,12 +38,19 @@ def get_attraction():
 	page=request.args.get('page','')
 	keyword=request.args.get('keyword','')
 	try:
-		page=int(page)								
+		page=int(page)					
+		# 筆數			
+		mycursor.execute(f'select count(*) from spot where name like "%{keyword}%"')
+		num=mycursor.fetchone()[0]
+		
 		select=select_spot
 		if keyword!='':
 			select+=f' where name like "%{keyword}%"'
 		select+=f' order by id limit {page*12}, 12'
 		mycursor.execute(select)
+	except mysql.connector.errors.PoolError:
+		db.close()
+		db2 = mysql.connector.connect(pool_name='my_connection_pool')
 	except:
 		abort(500)
 	else:
@@ -55,16 +65,18 @@ def get_attraction():
 			spots.append(spot)
 			
 		result['data']=spots #data:[{spot1},{spot2}]
-		if num_data<12:
-			next_page=None
-		else:
+		if num-(page*12+num_data)>0:
 			next_page=page+1
+		else:
+			next_page=None
 		result['nextPage']=next_page
 		return jsonify(result),200
 	
-
+@app.route('/api/attraction/',defaults={'attractionid':''})
 @app.route('/api/attraction/<attractionid>')
 def get_attraction_by_id(attractionid):
+	if attractionid=='' or attractionid=='0':
+		return redirect('/api/attraction/1')
 	try:
 		attractionid=int(attractionid)
 	except:
@@ -75,12 +87,14 @@ def get_attraction_by_id(attractionid):
 	try:
 		mycursor.execute(select)
 		data=list(list(mycursor)[0])
+	except mysql.connector.errors.PoolError:
+		db.close()
+		db2 = mysql.connector.connect(pool_name='my_connection_pool')
 	except:
 		abort(500)
 	else:
 		column_names=mycursor.column_names #tuple
 		spot=spot_handle(data,column_names)
-			
 		result['data']=spot #data:{spot}
 	return jsonify(result),200
 
@@ -95,7 +109,6 @@ def spot_handle(data,column_names):
 		spot[key]=d
 	return spot
 
-
 # error handle
 @app.errorhandler(400)
 def input_error(error):
@@ -108,7 +121,7 @@ def input_error(error):
 def server_error(error):
 	result={}
 	result['error']=True
-	result['message']='伺服器錯誤'
+	result['message']='伺服器錯誤:'+str(error)
 	return jsonify(result),500
     
     
