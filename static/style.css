@@ -20,8 +20,11 @@ p,
 
 .width {
     width: 1200px;
+    height: 100%;
     position: relative;
-
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 /* login block  */
@@ -37,7 +40,6 @@ p,
     position: fixed;
     top: 70px;
     background-color: #ffffff;
-    z-index: 20000;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -66,7 +68,8 @@ p,
     width: 100%;
     position: fixed;
     top: 0;
-    z-index: 100;
+    z-index: 10000;
+
 }
 
 nav {
@@ -79,7 +82,7 @@ nav {
     color: #448899;
     font-size: 30px;
     font-weight: bold;
-    padding: 0 10px;
+    padding: 0 0 0 10px;
 
 }
 
@@ -87,32 +90,35 @@ nav {
     list-style-type: none;
     display: flex;
     color: #666666;
+    justify-content: flex-end;
+
 }
 
 #top-right li {
-    padding: 0 10px;
+    padding: 0 10px 0 10px;
+    width: 80px;
+    text-align: right;
 }
 
 /* end nav */
 
 /* banner */
 .banner {
+    background: linear-gradient(135deg, #AADDEE 0%, #66AABB 100%);
     height: 320px;
     width: 100%;
-    background: linear-gradient(135deg, #AADDEE 0%, #66AABB 100%);
     margin-top: 50px;
     align-items: center;
-
 }
 
 #banner-text {
     height: 150px;
-    padding: 0 10px;
-    width: 100%;
+    padding: 0 15px;
     color: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    z-index: 10;
 }
 
 #banner-title {
@@ -120,19 +126,11 @@ nav {
     font-family: 'Noto Sans';
     font-weight: bold;
     line-height: 46px;
-    z-index: 2;
-
 }
 
-#banner-slogan {
-    z-index: 2;
-
-}
 
 #search-block {
     display: flex;
-    z-index: 2;
-
 }
 
 #spot-name-search {
@@ -140,9 +138,7 @@ nav {
     height: 46px;
     border-radius: 5px 0 0 5px;
     border: transparent solid 1px;
-    z-index: 2;
     font-size: 16px;
-
 }
 
 #search-icon {
@@ -154,15 +150,11 @@ nav {
     justify-content: center;
     align-items: center;
     border: #448899 solid 2px;
-    z-index: 2;
-
 }
 
 #welcome {
     position: absolute;
-    top: -85px;
     right: 0;
-    z-index: 1;
 }
 
 /* end banner */
@@ -237,7 +229,6 @@ nav {
 
 
 
-
 @media (min-width:1200px) {
     .card {
         width: 270px;
@@ -247,8 +238,14 @@ nav {
 }
 
 @media (max-width:1200px) {
+
+    .width {
+        width: 100%;
+    }
+
     .card {
-        width: 38%;
+        width: 23%;
+        height: 200px;
         margin: 10px;
     }
 }
@@ -256,29 +253,37 @@ nav {
 /* m size */
 @media (max-width:960px) {
     #welcome {
-        width: 450px;
-        top: 14px;
-    }
-
-    #content {
-        width: 90%;
-        justify-content: space-evenly;
+        height: 80%;
+        bottom: 0;
     }
 
     .card {
         width: 40%;
         margin-bottom: 20px;
-        object-fit: cover;
-        max-height: 250px;
+        /* object-fit: cover; */
+        height: 250px;
     }
 }
 
 /* s size */
 @media(max-width:600px) {
+
     #welcome {
-        width: 300px;
-        top: 88px;
-        right: -10px;
+        display: none;
+    }
+
+    #banner-img {
+        background-image: url(img/welcome\ 1.png);
+        background-repeat: no-repeat;
+        background-position: bottom right -55px;
+        background-size: 90%;
+        height: 100%;
+        width: 100%;
+        display: block;
+    }
+
+    #banner-text {
+        margin: 82px 0;
     }
 
     #spot-name-search {
@@ -288,12 +293,12 @@ nav {
 
     .card {
         width: 100%;
-        object-fit: cover;
-        max-height: 600px;
-        min-height: 300px;
+        /* object-fit: cover; */
+        height: 350px;
     }
 }
 
+/* footer */
 footer {
     height: 100px;
     background-color: #000000;
@@ -322,7 +327,7 @@ footer p {
 #arrow {
     width: 13px;
     height: 13px;
-    border: #e8e8e8 5px solid;
+    border: #ffffff 5px solid;
     border-right: transparent;
     border-bottom: transparent;
     transform: rotate(45deg);
