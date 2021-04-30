@@ -1,7 +1,8 @@
 async function getData(page, keyword) {
     const url = '/api/attractions';
-    if (load == false) {
-        // console.log('get data')
+    if (loading == false) {
+        console.log('get data')
+        loading = true;
         if (keyword === '') {
             res = await fetch(`${url}?page=${page}`);
         } else {
@@ -9,7 +10,6 @@ async function getData(page, keyword) {
         }
         jsonData = await res.json();
         appendContent(jsonData);
-        nextPage = jsonData.nextPage;
     } else {
         return;
     }
@@ -52,7 +52,6 @@ function appendContent(data) {
                 mrt = document.createTextNode('其他');
 
             }
-
             cardMrt.appendChild(mrt);
 
             let cardCategory = document.createElement('div');
@@ -69,10 +68,11 @@ function appendContent(data) {
             content.appendChild(card);
         }
     }
-    setTimeout(() => {
-        load = false;
-        // console.log(load)
-    }, 2000);
+    nextPage = data.nextPage;
+    loading = false;
+    // setTimeout(() => {
+    //     console.log('wait')
+    // }, 1000);
 }
 
 function removeContent() {
@@ -85,7 +85,7 @@ function removeContent() {
     container.appendChild(cnt);
 }
 
-let load = false;
+let loading = false;
 let nextPage = '0';
 let keyword = '';
 window.addEventListener('load', function () {
@@ -97,15 +97,14 @@ window.addEventListener('scroll', function () {
     let cnt = document.getElementById('content');
     let cntPosition = cnt.getBoundingClientRect();
 
-    setTimeout(() => {
-        if (cntPosition.bottom < window.innerHeight) {
-            if (nextPage != null) {
-                getData(nextPage, keyword);
-            }
-            load = true;
-            // console.log(load)
+    // console.log('cntPosition.bottom:', cntPosition.bottom)
+    // console.log('window.innerHeight:', window.innerHeight)
+    if (cntPosition.bottom < window.innerHeight) {
+        if (nextPage != null) {
+            console.log(nextPage)
+            getData(nextPage, keyword);
         }
-    }, 2000);
+    }
 })
 
 let searchIcon = document.getElementById('search-icon');
