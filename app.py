@@ -1,21 +1,24 @@
 from flask import *
 import jinja2
 import mysql.connector 
+from mysql.connector.pooling import MySQLConnectionPool
+
 from data.dbconfig import user,password
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 
 
-db=mysql.connector.connect(
+db=MySQLConnectionPool(
 	host='localhost',
 	user=user, 
 	password=password, # change config when upload
 	database='taipeispot',
 	pool_name='my_connection_pool',
-	pool_size=5
+	pool_size=5,
+	pool_reset_session=True
 )
-mycursor = db.cursor()
+# mycursor = db.cursor()
 select_spot='select * from spot'
 
 # Pages
@@ -40,6 +43,8 @@ def get_attraction():
 	try:
 		page=int(page)					
 		# 筆數			
+		conn=db.get_connection()
+		mycursor=conn.cursor()
 		mycursor.execute(f'select count(*) from spot where name like "%{keyword}%"')
 		num=mycursor.fetchone()[0]
 		
@@ -48,14 +53,14 @@ def get_attraction():
 			select+=f' where name like "%{keyword}%"'
 		select+=f' order by id limit {page*12}, 12'
 		mycursor.execute(select)
-	except mysql.connector.errors.PoolError:
-		db2 = mysql.connector.connect(pool_name='my_connection_pool')
+	
 	except:
 		abort(500)
 	else:
 		data=list(mycursor)
 		column_names=mycursor.column_names #tuple
-		db.close()
+		mycursor.close()
+		conn.close()
 		spots=[]
 		# print(data)
 		num_data=len(data)
@@ -85,15 +90,15 @@ def get_attraction_by_id(attractionid):
 		result={}
 		select=f'{select_spot} where id ={attractionid}'
 	try:
+		conn=db.get_connection()
+		mycursor=conn.cursor()
 		mycursor.execute(select)
 		data=list(list(mycursor)[0])
-	except mysql.connector.errors.PoolError:
-		db2 = mysql.connector.connect(pool_name='my_connection_pool')
+	
 	except:
 		abort(500)
 	else:
 		column_names=mycursor.column_names #tuple
-		db.close()
 		spot=spot_handle(data,column_names)
 		result['data']=spot #data:{spot}
 	return jsonify(result),200
@@ -126,4 +131,4 @@ def server_error(error):
     
     
 
-app.run(host="0.0.0.0", port=3000)#,debug=True)
+app.run(host="0.0.0.0", port=3000,debug=True)
