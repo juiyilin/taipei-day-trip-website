@@ -13,7 +13,7 @@ db=mysql.connector.connect(
 	password=password, # change config when upload
 	database='taipeispot',
 	pool_name='my_connection_pool',
-	pool_size=2
+	pool_size=5
 )
 mycursor = db.cursor()
 select_spot='select * from spot'
@@ -49,13 +49,13 @@ def get_attraction():
 		select+=f' order by id limit {page*12}, 12'
 		mycursor.execute(select)
 	except mysql.connector.errors.PoolError:
-		db.close()
 		db2 = mysql.connector.connect(pool_name='my_connection_pool')
 	except:
 		abort(500)
 	else:
 		data=list(mycursor)
 		column_names=mycursor.column_names #tuple
+		db.close()
 		spots=[]
 		# print(data)
 		num_data=len(data)
@@ -88,12 +88,12 @@ def get_attraction_by_id(attractionid):
 		mycursor.execute(select)
 		data=list(list(mycursor)[0])
 	except mysql.connector.errors.PoolError:
-		db.close()
 		db2 = mysql.connector.connect(pool_name='my_connection_pool')
 	except:
 		abort(500)
 	else:
 		column_names=mycursor.column_names #tuple
+		db.close()
 		spot=spot_handle(data,column_names)
 		result['data']=spot #data:{spot}
 	return jsonify(result),200
