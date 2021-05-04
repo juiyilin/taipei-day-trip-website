@@ -1,0 +1,14 @@
+html,
+head,
+body,
+nav,
+footer,
+div,
+h1,
+h2,
+h3,
+p,
+.container {
+    margin: 0;
+    padding: 0;
+}
