@@ -137,6 +137,10 @@ img {
     flex-direction: row;
 }
 
+input[type=date] {
+    padding: 2px;
+}
+
 input[type=radio] {
     -webkit-appearance: none;
     width: 16px;
@@ -190,6 +194,7 @@ input[type=radio]:checked {
 #infors {
     display: block;
     margin-bottom: 50px;
+    line-height: 30px;
 }
 
 /*end down side */

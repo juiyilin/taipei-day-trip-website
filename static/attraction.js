@@ -1,6 +1,14 @@
 function select(dom) {
-    result = document.querySelector(dom);
+    const result = document.querySelector(dom);
     return result
+}
+
+function init() {
+    let api = '/api';
+    let path = window.location.pathname;
+    let imgs;
+    getDataById(api + path);
+    return imgs
 }
 async function getDataById(url) {
     let res = await fetch(url);
@@ -88,35 +96,40 @@ function showAmount() {
     })
 }
 
-
+function clickChangeImg(domId) {
+    domId.addEventListener('click', () => {
+        changeImage(domId.id);
+        // clearInterval(slideImg);
+        // slideImg = setInterval(() => {
+        //     let image = select('img');
+        //     if (image.complete) {
+        //         changeImage(nextImg.id);
+        //     }
+        // }, 2000);
+    });
+}
 // load data
-let api = '/api'
-let path = window.location.pathname;
-let imgs
-getDataById(api + path);
+imgs = init();
 
 // change image
 let lastImg = select('#last-img');
 let nextImg = select('#next-img');
-lastImg.addEventListener('click', () => {
-    changeImage(lastImg.id);
-});
-nextImg.addEventListener('click', () => {
-    changeImage(nextImg.id);
-});
+clickChangeImg(lastImg);
+clickChangeImg(nextImg);
 
 
-setInterval(() => {
-    let image = select('img');
-    if (image.complete) {
-        changeImage(nextImg.id);
-    }
-}, 2000)
+
+// let slideImg = setInterval(() => {
+//     let image = select('img');
+//     if (image.complete) {
+//         changeImage(nextImg.id);
+//     }
+// }, 2000);
 
 
 
 // show amount
-let choosePeriod = document.querySelectorAll('.date-period')[1]
+let choosePeriod = document.querySelectorAll('.date-period')[1];
 choosePeriod.addEventListener('click', () => {
     showAmount();
 })
