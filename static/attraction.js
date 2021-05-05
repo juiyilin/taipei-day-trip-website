@@ -10,6 +10,7 @@ function init() {
     getDataById(api + path);
     return imgs
 }
+
 async function getDataById(url) {
     let res = await fetch(url);
     let jsonData = await res.json();
@@ -79,21 +80,20 @@ function changeImage(id) {
 }
 
 function showAmount() {
-    let radios = document.querySelectorAll('label');
-    radios.forEach((radio) => {
-        radio.addEventListener('click', function (event) {
-            event.stopPropagation();
-            let period = radio.querySelector('input');
-            if (period.checked) {
+    let label = document.querySelectorAll('label');
+    for (let i = 0; i < label.length; i++) {
+        let input = label[i].querySelector('input');
+        input.addEventListener('click', () => {
+            if (input.checked) {
                 let amount = select('#amount');
-                if (period.value === 'am') {
+                if (input.value === 'am') {
                     amount.textContent = '新台幣2000元';
                 } else {
                     amount.textContent = '新台幣2500元';
                 }
             }
-        });
-    })
+        })
+    }
 }
 
 function clickChangeImg(domId) {
@@ -129,7 +129,4 @@ clickChangeImg(nextImg);
 
 
 // show amount
-let choosePeriod = document.querySelectorAll('.date-period')[1];
-choosePeriod.addEventListener('click', () => {
-    showAmount();
-})
+showAmount();
