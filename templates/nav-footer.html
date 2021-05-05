@@ -5,8 +5,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/reset.css">
     <link rel="stylesheet" href="../static/style.css">
+    {% block custom_css%}{% endblock %}
     <title>Taipei-Day-Trip</title>
+    <style>
+        #top-left>a {
+            text-decoration: none;
+            color: #448899;
+        }
+
+        #top-left>a:visited {
+            text-decoration: none;
+            color: #448899;
+        }
+    </style>
 </head>
 
 
@@ -15,92 +28,33 @@
 
     <div class="container" id="nav-bgcolor">
         <nav class="width">
-            <div id="top-left"> 台北一日遊</div>
+            <div id="top-left"> <a href="/">台北一日遊</a></div>
             <div id="top-right">
                 <li>預定行程</li>
                 <li>登入/註冊</li>
             </div>
         </nav>
     </div>
-    <div class="container banner">
-        <div id="login-block">
-            <div id="login-text">登入會員帳號</div>
-            <input type="text" name="" id="" class="login">
-            <input type="text" name="" id="" class="login">
-            <button class="login" id="login-btn">登入帳戶</button>
-            <div id="no-account"></div>
+
+    {% block content%}
+
+    {% endblock %}
+
+    <a href="#when-login">
+        <div id="to-top">
+            <div id="arrow"></div>
         </div>
-        <div class="width">
-            <div id="banner-text">
-                <p id="banner-title">輕鬆享受台北一日悠閒</p>
-                <p id="banner-slogan">探索每個角落，體驗城市的深度旅遊行程</p>
-                <input type="text" name="spot-name-search" id="spot-name-search"><input type="image" src="" alt="">
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="width">
-            <div class="article"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis explicabo repudiandae,
-                rerum
-                eos necessitatibus laboriosam! Architecto facere voluptate culpa aliquid facilis. Dolore nihil voluptas
-                possimus dolorum! Ipsam cumque sint eaque. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Eligendi
-                magnam officiis, neque aliquid iusto dicta ex velit ab, quidem nemo tenetur? Accusamus ipsa praesentium
-                doloribus maxime quae impedit illum exercitationem ullam, pariatur porro nisi maiores. Error nulla
-                itaque,
-                dignissimos fuga perferendis molestiae cupiditate alias est reprehenderit id, dicta quam? Placeat
-                delectus
-                repellendus necessitatibus doloremque et culpa voluptates inventore esse minus nostrum eaque tempora
-                nulla
-                nihil quibusdam perspiciatis error illum ea, adipisci nisi similique eos. Reprehenderit sint aperiam
-                error
-                doloribus voluptatem rerum amet quas tempora veniam iusto, non accusantium totam laudantium ratione,
-                fugiat
-                optio corporis, quasi illo quae provident debitis cupiditate explicabo illum. Corporis iusto neque eius
-                voluptate! Cupiditate officia, consequatur natus accusamus eligendi, veniam, asperiores totam quasi
-                nulla
-                voluptatem dolor possimus provident pariatur placeat! Recusandae, magni ab numquam dolorum, enim quas
-                eius
-                minus quibusdam pariatur, illo non unde. A tempore beatae sint quisquam consectetur nesciunt aut neque!
-                Eius
-                dolorem incidunt officiis dolor laudantium quaerat delectus, vitae voluptate cupiditate, unde, nulla
-                magni
-                ex. Asperiores quod esse consectetur repellendus molestiae quia ea repudiandae pariatur, excepturi et.
-                Veniam, reiciendis facilis commodi, temporibus tempore in accusantium libero nisi dolore, ipsam ducimus
-                consectetur dolores praesentium corrupti assumenda quisquam minima necessitatibus aut deleniti facere
-                asperiores quibusdam. Ut itaque eos esse blanditiis nam voluptatem expedita id earum asperiores odit
-                excepturi beatae veniam, autem saepe non voluptates? Aspernatur, magni. Aspernatur, provident et commodi
-                explicabo totam, possimus veniam ipsa eum voluptatem voluptates obcaecati dolorem perspiciatis nobis.
-                Possimus magnam delectus ad? Expedita aut autem veniam, commodi saepe officiis quidem molestias quaerat
-                mollitia animi maiores adipisci, accusantium obcaecati distinctio, facere et voluptate! Cumque vero
-                voluptate ea, quasi quia corrupti ad, veniam quaerat alias expedita itaque accusamus? Mollitia maxime
-                harum
-                blanditiis nisi possimus distinctio voluptas quam porro dolorum natus commodi, tenetur ipsam vitae esse,
-                deleniti velit quos est temporibus, quasi hic labore fuga vero maiores. Soluta, placeat, laboriosam nisi
-                ullam debitis minus molestiae non est, enim quaerat fugit! Esse assumenda sapiente quibusdam rem
-                voluptatibus natus corrupti explicabo? Dolore quas maxime sed, reprehenderit non, fuga ipsam numquam
-                molestiae adipisci, aspernatur nostrum iusto voluptatum quaerat illum a ad odit corporis error. Rerum
-                sapiente eaque incidunt deleniti architecto optio omnis recusandae nemo repellendus est, consequatur
-                unde
-                nulla error tempore autem magnam sunt facere quidem consectetur adipisci dolore voluptates quis. Error,
-                ipsam quas totam recusandae tempora debitis, quibusdam quaerat veniam, corrupti cupiditate dignissimos
-                quidem autem exercitationem mollitia? Optio aliquam, ut animi sunt ea et non. Voluptas culpa similique
-                exercitationem sunt, laborum dolor asperiores distinctio itaque obcaecati nihil qui, maxime atque labore
-                ullam modi. Pariatur eum earum ad quos porro, inventore animi sequi id quaerat provident ex eligendi
-                aspernatur laudantium distinctio cupiditate delectus dolorum vel nihil commodi? Dicta, quia adipisci
-                consectetur tempore neque tempora explicabo illum itaque esse officiis possimus ipsum natus eveniet
-                dolor
-                beatae. Tenetur odio perspiciatis voluptate sed, enim ipsa asperiores. Odit quibusdam pariatur
-                perspiciatis
-                saepe qui voluptatibus, ducimus voluptas cupiditate quae vero? Doloremque impedit eum vel, tempora,
-                reprehenderit ut deserunt accusamus nisi illo animi nobis alias sapiente officiis quibusdam saepe
-                perferendis? Eligendi, voluptas labore.</div>
-        </div>
-    </div>
+    </a>
     <footer class="container">
         <p>COPYRIGHT © 2021 台北一日遊</p>
     </footer>
 </body>
-
+<!-- <div id="login-block">
+    <div id="login-text">登入會員帳號</div>
+    <input type="text" name="" id="" class="login">
+    <input type="text" name="" id="" class="login">
+    <button class="login" id="login-btn">登入帳戶</button>
+    <div id="no-account"></div>
+</div> -->
 
 </html>

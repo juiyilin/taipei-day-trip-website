@@ -1,7 +1,7 @@
 async function getData(page, keyword) {
     const url = '/api/attractions';
     if (loading == false) {
-        console.log('get data')
+        // console.log('get data')
         loading = true;
         if (keyword === '') {
             res = await fetch(`${url}?page=${page}`);
@@ -31,9 +31,12 @@ function appendContent(data) {
             // .img>img
             let img = document.createElement('div');
             img.className = 'img';
+            let hyperlink = document.createElement('a');
+            hyperlink.href = `/attraction/${data.data[i].id}`;
             let imgsrc = document.createElement('img');
             imgsrc.src = data.data[i].images[0];
-            img.appendChild(imgsrc);
+            hyperlink.appendChild(imgsrc);
+            img.appendChild(hyperlink);
 
             // .card-info>.card-name+mrt+category
             let cardInfo = document.createElement('div');
@@ -70,9 +73,6 @@ function appendContent(data) {
     }
     nextPage = data.nextPage;
     loading = false;
-    // setTimeout(() => {
-    //     console.log('wait')
-    // }, 1000);
 }
 
 function removeContent() {
@@ -88,6 +88,7 @@ function removeContent() {
 let loading = false;
 let nextPage = '0';
 let keyword = '';
+
 window.addEventListener('load', function () {
     getData(nextPage, keyword);
 })
@@ -101,12 +102,12 @@ window.addEventListener('scroll', function () {
     // console.log('window.innerHeight:', window.innerHeight)
     if (cntPosition.bottom < window.innerHeight) {
         if (nextPage != null) {
-            console.log(nextPage)
             getData(nextPage, keyword);
         }
     }
 })
 
+//click to search
 let searchIcon = document.getElementById('search-icon');
 searchIcon.addEventListener('click', function () {
     removeContent();
@@ -115,7 +116,7 @@ searchIcon.addEventListener('click', function () {
     // console.log(keyword);
     getData(nextPage, keyword);
 })
-
+//tab enter to search
 let inpSearch = document.getElementById('spot-name-search');
 inpSearch.addEventListener('keyup', function (event) {
     if (event.keyCode === 13) {

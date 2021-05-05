@@ -1,0 +1,200 @@
+.content {
+    margin-top: 50px;
+    padding: 0 10px 30px 10px;
+    color: #666666;
+}
+
+/* up side */
+.img {
+    width: 50%;
+    height: 406px;
+    position: relative;
+}
+
+img {
+    object-fit: cover;
+    width: 96%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.arrow {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    opacity: 0.8;
+    position: absolute;
+    top: 178px;
+    position: absolute;
+}
+
+.arrow:hover {
+    background-color: #448899;
+    opacity: 1;
+}
+
+#last-img {
+    left: 5px;
+}
+
+#next-img {
+    right: 25px;
+}
+
+.arrow>div {
+    width: 13px;
+    height: 13px;
+    border: #000000 5px solid;
+    border-right: transparent;
+    border-bottom: transparent;
+    opacity: 0.8;
+    position: absolute;
+    top: 17px;
+}
+
+#last-img>div {
+    transform: rotate(-45deg);
+    left: 19px;
+
+}
+
+#next-img>div {
+    transform: rotate(135deg);
+    left: 14px;
+
+}
+
+#total-img {
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#total-img>div {
+    margin: 0 3px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+#total-img>.show {
+    border: #ffffff solid 2px;
+    background-color: #000000;
+}
+
+#total-img>.none {
+    border: #ffffff solid 2px;
+    background-color: #666666;
+}
+
+#profile {
+    width: 50%;
+    height: 400px;
+    padding: 3px;
+}
+
+#title {
+    height: 25%;
+}
+
+#name,
+#category-mrt {
+    height: 50%;
+}
+
+#name {
+    font-size: 24px;
+}
+
+#category-mrt {
+    font-size: 16px;
+}
+
+#booking-form {
+    background-color: #e8e8e8;
+    border-radius: 5px;
+    height: 75%;
+    padding-left: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#booking-form p {
+    font-size: 16px;
+}
+
+.date-period {
+    display: flex;
+    flex-direction: row;
+}
+
+input[type=date] {
+    padding: 2px;
+}
+
+input[type=radio] {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #ffffff;
+}
+
+input[type=radio]:checked {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ffffff;
+    background-color: #448899;
+}
+
+#btn {
+    background-color: #448899;
+    border-radius: 5px;
+    color: #ffffff;
+    width: 154px;
+    height: 36px;
+    line-height: 37px;
+    text-align: center;
+    font-size: 19px;
+}
+
+@media(max-width:900px) {
+    .content {
+        flex-wrap: wrap;
+    }
+
+    .img {
+        width: 100%;
+    }
+
+    .img>img {
+        width: 100%;
+    }
+
+    #next-img {
+        right: 2%;
+    }
+
+    #profile {
+        width: 100%;
+    }
+}
+
+/*end up side */
+/*down side */
+#infors {
+    display: block;
+    margin-bottom: 50px;
+    line-height: 30px;
+}
+
+/*end down side */

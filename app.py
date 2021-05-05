@@ -15,10 +15,9 @@ db=MySQLConnectionPool(
 	password=password, # change config when upload
 	database='taipeispot',
 	pool_name='my_connection_pool',
-	pool_size=5,
+	pool_size=10,
 	pool_reset_session=True
 )
-# mycursor = db.cursor()
 select_spot='select * from spot'
 
 # Pages
@@ -43,8 +42,7 @@ def get_attraction():
 	try:
 		page=int(page)					
 		# 筆數			
-		conn=db.get_connection()
-		mycursor=conn.cursor()
+		conn,mycursor=db_connect()
 		mycursor.execute(f'select count(*) from spot where name like "%{keyword}%"')
 		num=mycursor.fetchone()[0]
 		
@@ -59,8 +57,7 @@ def get_attraction():
 	else:
 		data=list(mycursor)
 		column_names=mycursor.column_names #tuple
-		mycursor.close()
-		conn.close()
+		db_close(conn,mycursor)
 		spots=[]
 		# print(data)
 		num_data=len(data)
@@ -90,8 +87,7 @@ def get_attraction_by_id(attractionid):
 		result={}
 		select=f'{select_spot} where id ={attractionid}'
 	try:
-		conn=db.get_connection()
-		mycursor=conn.cursor()
+		conn,mycursor=db_connect()
 		mycursor.execute(select)
 		data=list(list(mycursor)[0])
 	
@@ -99,6 +95,7 @@ def get_attraction_by_id(attractionid):
 		abort(500)
 	else:
 		column_names=mycursor.column_names #tuple
+		db_close(conn,mycursor)
 		spot=spot_handle(data,column_names)
 		result['data']=spot #data:{spot}
 	return jsonify(result),200
@@ -113,6 +110,15 @@ def spot_handle(data,column_names):
 	for key,d in zip(column_names,data):
 		spot[key]=d
 	return spot
+
+def db_connect():
+	conn=db.get_connection()
+	mycursor=conn.cursor()
+	return conn,mycursor
+
+def db_close(conn,mycursor):
+	mycursor.close()
+	conn.close()
 
 # error handle
 @app.errorhandler(400)

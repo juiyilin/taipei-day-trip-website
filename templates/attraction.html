@@ -1,0 +1,56 @@
+{% extends 'nav-footer.html'%}
+{% block custom_css%}
+<link rel="stylesheet" href="../static/attraction.css">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="width content">
+        <div class="img">
+            <img src="" alt="">
+            <div class="arrow" id="last-img">
+                <div></div>
+            </div>
+            <div class="arrow" id="next-img">
+                <div></div>
+            </div>
+            <div id="total-img">
+                <!-- dot -->
+            </div>
+        </div>
+
+        <div id="profile">
+            <div id="title">
+                <h3 id="name"></h3>
+                <div id="category-mrt"></div>
+            </div>
+            <div id="booking-form">
+                <p>訂購導覽行程</p>
+                <p>以此景點為中心的一日行程，帶您探索城市角落故事</p>
+                <div class="date-period">
+                    <p>選擇日期：</p><input type="date" name="" id="">
+                </div>
+                <div class="date-period">
+                    <p>選擇時間：</p>
+                    <label><input type="radio" name="period" id="" value="am">上半天</label>
+                    <label><input type="radio" name="period" id="" value="pm">下半天</label>
+                </div>
+                <p>導覽費用：<span id="amount">請選擇時間</span></p>
+                <div id=btn type="submit">開始預訂行程</div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="width">
+<div class="container">
+    <div class="width content" id="infors">
+        <p></p>
+        <br>
+        <h3>景點地址：</h3>
+        <p></p>
+        <br>
+        <h3>交通方式：</h3>
+        <p></p>
+    </div>
+</div>
+<script src="../static/attraction.js"></script>
+{% endblock %}
