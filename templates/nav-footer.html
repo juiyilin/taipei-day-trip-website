@@ -5,56 +5,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/reset.css">
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/reset.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
     {% block custom_css%}{% endblock %}
     <title>Taipei-Day-Trip</title>
-    <style>
-        #top-left>a {
-            text-decoration: none;
-            color: #448899;
-        }
-
-        #top-left>a:visited {
-            text-decoration: none;
-            color: #448899;
-        }
-    </style>
 </head>
 
 
-<body id='when-login'>
-
-
+<body>
     <div class="container" id="nav-bgcolor">
         <nav class="width">
             <div id="top-left"> <a href="/">台北一日遊</a></div>
             <div id="top-right">
-                <li>預定行程</li>
-                <li>登入/註冊</li>
+                <a href="/booking">
+                    <li>預定行程</li>
+                </a>
+                <li id="signinup"></li>
             </div>
         </nav>
     </div>
 
-    {% block content%}
+    {% block content%}{% endblock %}
 
-    {% endblock %}
-
-    <a href="#when-login">
-        <div id="to-top">
-            <div id="arrow"></div>
+    <div id="popup-background"></div>
+    <div class="popup">
+        <div id="login-block">
+            <div class="popup-title">登入會員帳號</div>
+            <img class="close" src="../static/img/icon_close.png" alt="">
+            <input type="email" class="login" placeholder="輸入電子信箱">
+            <input type="password" class="login" placeholder="輸入密碼">
+            <button class="login" id="login-btn">登入帳戶</button>
+            <p>還沒有帳戶？<span class="switch">點此註冊</span></p>
         </div>
-    </a>
+        <div id="signup-block">
+            <div class="popup-title">註冊會員帳號</div>
+            <img src="../static/img/icon_close.png" alt="" class="close">
+            <input type="text" class="login" placeholder="輸入姓名">
+            <input type="email" class="login" placeholder="輸入電子信箱">
+            <input type="password" class="login" placeholder="輸入密碼">
+            <button class="login" id="signup-btn">註冊新帳戶</button>
+            <p>已經有帳戶了？<span class="switch">點此登入</span></p>
+        </div>
+    </div>
+    <script src="../static/signinout.js"></script>
+    {% block js%}{% endblock %}
     <footer class="container">
         <p>COPYRIGHT © 2021 台北一日遊</p>
     </footer>
+
 </body>
-<!-- <div id="login-block">
-    <div id="login-text">登入會員帳號</div>
-    <input type="text" name="" id="" class="login">
-    <input type="text" name="" id="" class="login">
-    <button class="login" id="login-btn">登入帳戶</button>
-    <div id="no-account"></div>
-</div> -->
+
 
 </html>

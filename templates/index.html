@@ -1,6 +1,6 @@
 {% extends 'nav-footer.html'%}
 {% block custom_css%}
-<link rel="stylesheet" href="../static/index.css">{% endblock %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">{% endblock %}
 
 {% block content%}
 <div class="container banner">
@@ -18,7 +18,6 @@
         </div>
     </div>
 </div>
-<a href=""></a>
 <div class="container">
     <div class="width" id="content">
         <!-- <div class="card">
@@ -33,11 +32,14 @@
         </di<br>v> -->
     </div>
 </div>
-<a href="#when-login">
+<!-- top btn -->
+<a href="#welcome">
     <div id="to-top">
         <div id="arrow"></div>
     </div>
 </a>
-<script src="../static/index.js"></script>
+{% endblock %}
 
+{% block js %}
+<script src="../static/index.js"></script>
 {% endblock %}

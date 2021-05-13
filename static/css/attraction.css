@@ -11,7 +11,7 @@
     position: relative;
 }
 
-img {
+.img>img {
     object-fit: cover;
     width: 96%;
     height: 100%;
