@@ -95,16 +95,31 @@ window.addEventListener('load', function () {
 
 
 window.addEventListener('scroll', function () {
-    let cnt = document.getElementById('content');
-    let cntPosition = cnt.getBoundingClientRect();
+    // let cnt = document.getElementById('content');
+    // let cntPosition = cnt.getBoundingClientRect();
 
     // console.log('cntPosition.bottom:', cntPosition.bottom)
     // console.log('window.innerHeight:', window.innerHeight)
-    if (cntPosition.bottom < window.innerHeight) {
-        if (nextPage != null) {
-            getData(nextPage, keyword);
-        }
+    // if (cntPosition.bottom < window.innerHeight) {
+    //     if (nextPage != null) {
+    //         getData(nextPage, keyword);
+    //     }
+    // }
+    let options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.3
     }
+    let callback = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                getData(nextPage, keyword);
+            }
+        })
+    }
+    let observer = new IntersectionObserver(callback, options);
+    let footer = document.querySelector('footer');
+    observer.observe(footer);
 })
 
 //click to search
@@ -116,6 +131,8 @@ searchIcon.addEventListener('click', function () {
     // console.log(keyword);
     getData(nextPage, keyword);
 })
+
+
 //tab enter to search
 let inpSearch = document.getElementById('spot-name-search');
 inpSearch.addEventListener('keyup', function (event) {

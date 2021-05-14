@@ -1,39 +1,3 @@
-/* login block  */
-#when-login {
-    /* background-color: rgb(141, 141, 141);
-    opacity: 0.3; */
-}
-
-#login-block {
-    width: 340px;
-    height: 275px;
-    border-top: solid #448899 10px;
-    position: absolute;
-    top: 70px;
-    margin: auto 0;
-    background-color: #ffffff;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 15px;
-    z-index: 500;
-}
-
-.login {
-    height: 46px;
-    border-radius: 5px;
-    border: rgb(184, 184, 184) solid 1px;
-}
-
-#login-btn {
-    background-color: #448899;
-    color: #ffffff;
-}
-
-/* end login block */
-
-
 /* banner */
 .banner {
     background: linear-gradient(135deg, #AADDEE 0%, #66AABB 100%);
@@ -81,6 +45,7 @@
     justify-content: center;
     align-items: center;
     border: #448899 solid 2px;
+    cursor: pointer;
 }
 
 #welcome {
@@ -202,7 +167,7 @@
     }
 
     #banner-img {
-        background-image: url(img/welcome\ 1.png);
+        background-image: url(/static/img/welcome\ 1.png);
         background-repeat: no-repeat;
         background-position: bottom right -55px;
         background-size: 90%;

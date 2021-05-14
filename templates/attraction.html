@@ -1,6 +1,6 @@
 {% extends 'nav-footer.html'%}
 {% block custom_css%}
-<link rel="stylesheet" href="../static/attraction.css">
+<link rel="stylesheet" href="{{url_for('static',filename='css/attraction.css')}}">
 {% endblock %}
 {% block content %}
 <div class="container">
@@ -52,5 +52,8 @@
         <p></p>
     </div>
 </div>
+{% endblock %}
+
+{% block js%}
 <script src="../static/attraction.js"></script>
 {% endblock %}
