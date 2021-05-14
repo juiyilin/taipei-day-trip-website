@@ -18,6 +18,7 @@ function closePopup(btn) {
         loginBlock.style.display = 'none';
         signupBlock.style.display = 'none';
         clearInputValue();
+        removeMessage();
     })
 }
 
@@ -66,13 +67,15 @@ switchTexts.forEach(switchText => {
             signupBlock.style.display = 'none';
         }
         clearInputValue();
+        removeMessage();
     })
 })
 
 
 // check login status
-// get
 let userApi = '/api/user';
+
+// get
 fetch(userApi)
     .then(jsdata => jsdata.json())
     .then(data => {
@@ -120,6 +123,7 @@ signupBtn.addEventListener('click', function () {
                 }
             }).then(res => res.json())
             .then(data => {
+                clearInputValue();
                 removeMessage();
                 if (data.ok) {
                     insertMessage('註冊成功', 'green', signupBlock);
