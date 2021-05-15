@@ -4,12 +4,7 @@ from mysql.connector.pooling import MySQLConnectionPool
 from data.dbconfig import user,password
 
 user_account=Blueprint('user',__name__)
-user_account.secret_key = os.urandom(24)
-session={
-    'id':None,
-    'name':None,
-    'email':None,
-}
+
 db=MySQLConnectionPool(
 	host='localhost',
 	user=user, 
@@ -23,10 +18,17 @@ select_user='select * from user'
 @user_account.route('/user', methods=['GET', 'POST', 'PATCH', 'DELETE'])
 def check_user():
     json_data={}
-    
+    session_keys=['id','name','email']
     if request.method=='GET':
         print('get')
-        json_data['data']=session
+        if 'id' in session:
+            print('get session',session)
+            json_data['data']=dict(session)
+        else:
+            for key in session_keys:
+                session[key]=None
+            print('get session',session)
+            json_data['data']=dict(session)
         
     elif request.method=='POST':
         print('post')
@@ -68,15 +70,15 @@ def check_user():
             if get_first==None:
                 abort(400,'帳號或密碼錯誤') #return error
             else:
-                for key,value in zip(session.keys(),get_first[:3]):
+                for key,value in zip(session_keys,get_first[:3]):
                     session[key]=value
                 print('session',session)
                 json_data['ok']=True
 
     elif request.method=='DELETE':
         print('delete')
-        for key in session.keys():
-            session[key]=None
+        for key in session_keys:
+            session.pop(key)
         json_data['ok']=True
     else:
         abort(400,'request method error') #return error
