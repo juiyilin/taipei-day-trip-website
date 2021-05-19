@@ -156,7 +156,7 @@ input[type=radio]:checked {
     background-color: #448899;
 }
 
-#btn {
+#booking-btn {
     background-color: #448899;
     border-radius: 5px;
     color: #ffffff;
@@ -165,6 +165,7 @@ input[type=radio]:checked {
     line-height: 37px;
     text-align: center;
     font-size: 19px;
+    cursor: pointer;
 }
 
 @media(max-width:900px) {

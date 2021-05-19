@@ -34,11 +34,6 @@ input {
     border-bottom: #e8e8e8 solid 1px;
 }
 
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
 #top-left {
     font-size: 30px;
@@ -194,10 +189,12 @@ nav {
 /* footer */
 footer {
     height: 100px;
-    background-color: #000000;
-    display: flex;
+    background-color: #757575;
     width: 100%;
     align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
 }
 
 footer p {

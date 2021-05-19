@@ -27,15 +27,15 @@
                 <p>訂購導覽行程</p>
                 <p>以此景點為中心的一日行程，帶您探索城市角落故事</p>
                 <div class="date-period">
-                    <p>選擇日期：</p><input type="date" name="" id="">
+                    <p>選擇日期：</p><input type="date">
                 </div>
                 <div class="date-period">
                     <p>選擇時間：</p>
-                    <label><input type="radio" name="period" id="" value="am">上半天</label>
-                    <label><input type="radio" name="period" id="" value="pm">下半天</label>
+                    <label><input type="radio" name="period" value="morning">上半天</label>
+                    <label><input type="radio" name="period" value="afternoon">下半天</label>
                 </div>
                 <p>導覽費用：<span id="amount">請選擇時間</span></p>
-                <div id=btn type="submit">開始預訂行程</div>
+                <div id=booking-btn type="submit">開始預訂行程</div><span id=booking-message></span>
             </div>
         </div>
     </div>
@@ -46,7 +46,7 @@
         <p></p>
         <br>
         <h3>景點地址：</h3>
-        <p></p>
+        <p id="address"></p>
         <br>
         <h3>交通方式：</h3>
         <p></p>
@@ -55,5 +55,5 @@
 {% endblock %}
 
 {% block js%}
-<script src="../static/attraction.js"></script>
+<script src="{{url_for('static',filename='js/attraction.js')}}"></script>
 {% endblock %}

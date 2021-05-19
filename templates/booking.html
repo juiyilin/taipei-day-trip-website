@@ -5,15 +5,15 @@
 {% block content %}
 <div class="container">
     <div class="content">
-        <h3>您好，<span id="username">"username"</span>，待預定的行程如下：</h3>
+        <h3>您好，<span id="username"></span>，待預定的行程如下：</h3>
         <br>
-        <div class="tour">
-            <img id="spot-img" src="http://www.travel.taipei/d_upload_ttn/sceneadmin/pic/11000848.jpg" alt="">
+        <div id="tour">
+            <img id="spot-img" src="" alt="">
             <div id="tour-info" class="bold">
-                <p>台北一日遊：<span id="name">"name"</span></p>
+                <p>台北一日遊：<span id="name"></span></p>
                 <p>日期：<span id="date"></span></p>
                 <p>時間：<span id="time"></span></p>
-                <p>費用：<span class="amount"></span></p>
+                <p>費用：新台幣<span class="amount"></span>元</p>
                 <p>地點：<span id="address"></span></p>
             </div>
             <img id="delete" src="/static/img/icon_delete.png" alt="">
@@ -23,9 +23,9 @@
 <div class="container">
     <div class="content">
         <h3 class="line-height">您的聯絡資訊</h3>
-        <p class="line-height">聯絡姓名：<input type="text" name="" id=""></p>
-        <p class="line-height">聯絡信箱：<input type="email" name="" id=""></p>
-        <p class="line-height">手機號碼：<input type="text" name="" id=""></p>
+        <p class="line-height">聯絡姓名：<input type="text" id="contact-name"></p>
+        <p class="line-height">聯絡信箱：<input type="email" id="email"></p>
+        <p class="line-height">手機號碼：<input type="text" id="phone"></p>
         <p class="bold line-height">請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</p>
     </div>
 </div>
@@ -43,4 +43,7 @@
         <div id=btn type="submit">確認訂購並付款</div>
     </div>
 </div>
+{% endblock %}
+{% block js%}
+<script src="{{url_for('static',filename='js/booking.js')}}"></script>
 {% endblock %}
