@@ -1,5 +1,4 @@
 from flask import *
-import os
 from mysql.connector.pooling import MySQLConnectionPool
 from data.dbconfig import user,password
 
@@ -77,8 +76,12 @@ def check_user():
 
     elif request.method=='DELETE':
         print('delete')
+        print(session)
         for key in session_keys:
             session.pop(key)
+        if 'data' in session:
+            session.pop('data')
+        print('delete',session)
         json_data['ok']=True
     else:
         abort(400,'request method error') #return error

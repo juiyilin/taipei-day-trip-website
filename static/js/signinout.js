@@ -161,3 +161,16 @@ loginBtn.addEventListener('click', function () {
             }
         })
 })
+
+// booking
+let booking = document.getElementById('booking');
+booking.addEventListener('click', function () {
+    fetch(userApi).then(res => res.json())
+        .then(data => {
+            if (data.data.id === null) {
+                signinup.click();
+            } else {
+                window.location = '/booking';
+            }
+        })
+})

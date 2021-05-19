@@ -15,6 +15,7 @@ async function getDataById(url) {
     let res = await fetch(url);
     let jsonData = await res.json();
     render(jsonData);
+    book();
 }
 
 function render(data) {
@@ -86,7 +87,7 @@ function showAmount() {
         input.addEventListener('click', () => {
             if (input.checked) {
                 let amount = select('#amount');
-                if (input.value === 'am') {
+                if (input.value === 'morning') {
                     amount.textContent = '新台幣2000元';
                 } else {
                     amount.textContent = '新台幣2500元';
@@ -107,6 +108,57 @@ function clickChangeImg(domId) {
         //     }
         // }, 2000);
     });
+}
+
+function book() {
+    let bookingBtn = select('#booking-btn');
+    bookingBtn.addEventListener('click', function () {
+        // check login
+        fetch('/api/user').then(res => res.json())
+            .then(data => {
+                if (data.data.id === null) {
+                    signinup.click();
+                } else {
+                    let input = document.querySelectorAll('#booking-form input');
+
+                    // check filled
+                    let bookingMessage = select('#booking-message');
+                    bookingMessage.textContent = '';
+                    if (input[0].value === '' | (input[1].checked === input[2].checked)) {
+                        bookingMessage.textContent = '請確認是否已選擇日期與時間';
+                        bookingMessage.style.color = 'red';
+                    }
+
+                    // post booking data
+                    let time;
+                    input.forEach(i => {
+                        if (i.checked) {
+                            time = i.value;
+                        }
+                    })
+
+                    let postBookingData = {
+                        attractionId: parseInt(window.location.pathname.split('/')[2], 10),
+                        date: input[0].value,
+                        time: time,
+                        price: parseInt(select('#amount').textContent.slice(3, 7), 10)
+                    };
+                    fetch('/api/booking', {
+                            body: JSON.stringify(postBookingData),
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            }
+                        }).then(res => res.json())
+                        .then(data => {
+                            if (data.ok) {
+                                window.location = '/booking';
+                                // console.log(data)
+                            }
+                        })
+                }
+            })
+    })
 }
 // load data
 imgs = init();

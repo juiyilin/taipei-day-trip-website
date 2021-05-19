@@ -17,9 +17,7 @@
         <nav class="width">
             <div id="top-left"> <a href="/">台北一日遊</a></div>
             <div id="top-right">
-                <a href="/booking">
-                    <li>預定行程</li>
-                </a>
+                <li id="booking">預定行程</li>
                 <li id="signinup"></li>
             </div>
         </nav>
@@ -47,9 +45,9 @@
             <p>已經有帳戶了？<span class="switch">點此登入</span></p>
         </div>
     </div>
-    <script src="../static/signinout.js"></script>
+    <script src="{{url_for('static',filename='js/signinout.js')}}"></script>
     {% block js%}{% endblock %}
-    <footer class="container">
+    <footer>
         <p>COPYRIGHT © 2021 台北一日遊</p>
     </footer>
 
