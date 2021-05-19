@@ -33,6 +33,8 @@ function createNoBookingContent() {
 
 function appendContents(bookData) {
     // console.log(bookData);
+    //spot-img
+    select('#spot-img').src = bookData.attraction.image;
     //name
     select('#name').textContent = bookData.attraction.name;
     //date
