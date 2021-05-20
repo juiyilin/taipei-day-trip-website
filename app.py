@@ -8,6 +8,7 @@ import os
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
+app.config['SEND_FILE_MAX_AGE_DEFAULT']=0
 app.register_blueprint(attraction,url_prefix='/api')
 app.register_blueprint(user_account,url_prefix='/api')
 app.register_blueprint(booking,url_prefix='/api')

@@ -41,9 +41,9 @@ function appendContents(bookData) {
     select('#date').textContent = bookData.date;
     //time
     if (bookData.time === 'morning') {
-        select('#time').textContent = '9:00-12:00';
+        select('#time').textContent = '早上 9 點到下午 4 點';
     } else {
-        select('#time').textContent = '13:00-16:00';
+        select('#time').textContent = '下午 2 點到晚上 9 點';
     }
     //amount
     let amounts = document.querySelectorAll('.amount');
