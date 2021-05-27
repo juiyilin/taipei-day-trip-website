@@ -13,13 +13,14 @@ def createDB(cursor,DBname):
 db = mysql.connector.connect(
     host="localhost",
     user=user,
-    password=password
+    password=password,
+    database='taipeispot'
 )
 mycursor = db.cursor()
 
 # database taipeispot
 createDB(mycursor,'taipeispot')
-db.database='taipeispot'
+# table spot
 try:
     mycursor.execute("""CREATE TABLE spot (
         id bigint PRIMARY KEY,
@@ -37,9 +38,8 @@ except mysql.connector.errors.ProgrammingError:
 else:
     print('table "spot" created')
 
-# database users
-createDB(mycursor,'users')
-db.database='users'
+
+# table user
 try:
     mycursor.execute("""CREATE TABLE user (
         id bigint PRIMARY KEY AUTO_INCREMENT,
@@ -50,3 +50,16 @@ except mysql.connector.errors.ProgrammingError:
     print('table "user" exist')
 else:
     print('table "user" created')
+
+# table order
+try:
+    mycursor.execute("""CREATE TABLE orders (
+        number VARCHAR(255) PRIMARY KEY NOT NULL,
+        user_id bigint NOT NULL,
+        trip_order TEXT CHARACTER SET utf8mb4 NOT NULL,
+        status bigint NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES user(id))""")
+except mysql.connector.errors.ProgrammingError:
+    print('table "order" exist')
+else:
+    print('table "order" created')

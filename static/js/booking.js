@@ -80,9 +80,14 @@ function trashcan() {
 
 }
 
+
+
+
+
 let contents = document.querySelectorAll('.content');
 contents.forEach(content => content.style.display = 'none');
 let account;
+let bookdata;
 fetch('api/user').then(res => res.json())
     .then(data => {
         if (data.data.id === null) {
@@ -106,6 +111,7 @@ fetch('api/user').then(res => res.json())
 
                     } else {
                         appendContents(data.data);
+                        bookdata = data.data
                     }
 
                 })

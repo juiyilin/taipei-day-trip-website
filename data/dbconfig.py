@@ -1,2 +1,2 @@
 user="root"
-password="JuiYiLin0925." #ec2
+password="JuiYiLin0925." 

@@ -76,6 +76,13 @@
     line-height: 50px;
 }
 
+
+.credit-card {
+    display: flex;
+    align-items: center;
+}
+
+.card-input,
 input {
     border-radius: 5px;
     border: 1px solid #E8E8E8;
@@ -98,4 +105,5 @@ input {
     line-height: 37px;
     text-align: center;
     font-size: 19px;
+    cursor: pointer;
 }
