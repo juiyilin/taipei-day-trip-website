@@ -90,7 +90,7 @@ let account;
 let bookdata;
 fetch('api/user').then(res => res.json())
     .then(data => {
-        if (data.data.id === null) {
+        if (data.data === null) {
             window.location = '/';
         } else {
             let username = select('#username');

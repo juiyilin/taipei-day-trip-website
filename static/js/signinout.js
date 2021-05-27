@@ -79,7 +79,7 @@ let userApi = '/api/user';
 fetch(userApi)
     .then(jsdata => jsdata.json())
     .then(data => {
-        if (data.data.id !== null) {
+        if (data.data !== null) {
             signinup.textContent = '登出系統';
             signinup.removeEventListener('click', showPopup);
             signinup.id = 'logout';
@@ -123,11 +123,13 @@ signupBtn.addEventListener('click', function () {
                 }
             }).then(res => res.json())
             .then(data => {
-                clearInputValue();
                 removeMessage();
                 if (data.ok) {
-                    insertMessage('註冊成功', 'green', signupBlock);
-
+                    clearInputValue();
+                    insertMessage('註冊成功，重新整理', 'green', signupBlock);
+                    setTimeout(() => {
+                        window.location.reload()
+                    }, 1000);
                 } else {
                     insertMessage(data.message, 'red', signupBlock);
                 }
@@ -167,7 +169,8 @@ let booking = document.getElementById('booking');
 booking.addEventListener('click', function () {
     fetch(userApi).then(res => res.json())
         .then(data => {
-            if (data.data.id === null) {
+            if (data.data === null) {
+                //if not login click 登入登出
                 signinup.click();
             } else {
                 window.location = '/booking';

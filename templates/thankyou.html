@@ -5,15 +5,25 @@
 {% block content %}
 <div class="container">
     <div class="width content">
-        <p>付款完成，感謝您的訂購，訂單號碼如下：</p>
+        <p></p>
         <p id="order-number"></p>
-        <p>相關資訊可於訂購紀錄中查詢</p>
+        <p></p>
         <a id="home" href="/">返回首頁</a>
     </div>
 </div>
 <script>
-    const orderNumber = document.querySelector('#order-number');
-    const queryString = new URLSearchParams(window.location.search);
-    orderNumber.textContent = queryString.get('number');
+    fetch('/api/user').then(res => res.json())
+        .then(data => {
+            if (data.data === null) {
+                window.location = '/';
+            } else {
+                let orderNumber = document.querySelector('#order-number');
+                let paragraph = document.querySelectorAll('p');
+                paragraph[0].textContent = '付款完成，感謝您的訂購，訂單號碼如下：';
+                paragraph[2].textContent = '相關資訊可於訂購紀錄中查詢';
+                const queryString = new URLSearchParams(window.location.search);
+                orderNumber.textContent = queryString.get('number');
+            }
+        })
 </script>
 {% endblock %}

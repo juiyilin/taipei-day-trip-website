@@ -19,18 +19,16 @@ def check_user():
     json_data={}
     session_keys=['id','name','email']
     if request.method=='GET':
-        print('get')
+        print('get user')
         if 'id' in session:
-            print('get session',session)
+            print(session)
             json_data['data']=dict(session)
         else:
-            for key in session_keys:
-                session[key]=None
-            print('get session',session)
-            json_data['data']=dict(session)
+            print(session)
+            json_data['data']=None
         
     elif request.method=='POST':
-        print('post')
+        print('post user')
         conn=db.get_connection()
         mycursor=conn.cursor()
         name=request.json['name']
@@ -47,14 +45,19 @@ def check_user():
                 print('not exist')
                 mycursor.execute(f'INSERT INTO user (name,email,password) VALUES ("{name}","{email}","{password}")')
                 conn.commit()
-                conn.close()
+                
+                #session紀錄
+                mycursor.execute(f'{select_user} where email like "{email}" and password like "{password}"')
+                get_first=mycursor.fetchone()
+                for key,value in zip(session_keys,get_first[:3]):
+                    session[key]=value
                 json_data['ok']=True
             else:
                 conn.close()
                 abort(400,'信箱已有人使用') #return error
         
     elif request.method=='PATCH':
-        print('patch')
+        print('patch user')
         conn=db.get_connection()
         mycursor=conn.cursor()
         email=request.json['email']
@@ -75,7 +78,7 @@ def check_user():
                 json_data['ok']=True
 
     elif request.method=='DELETE':
-        print('delete')
+        print('delete user')
         print(session)
         for key in session_keys:
             session.pop(key)
