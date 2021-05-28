@@ -127,35 +127,35 @@ function book() {
                     if (input[0].value === '' | (input[1].checked === input[2].checked)) {
                         bookingMessage.textContent = '請確認是否已選擇日期與時間';
                         bookingMessage.style.color = 'red';
-                    }
-
-                    // post booking data
-                    let time;
-                    input.forEach(i => {
-                        if (i.checked) {
-                            time = i.value;
-                        }
-                    })
-
-                    let postBookingData = {
-                        attractionId: parseInt(window.location.pathname.split('/')[2], 10),
-                        date: input[0].value,
-                        time: time,
-                        price: parseInt(select('#amount').textContent.slice(3, 7), 10)
-                    };
-                    fetch('/api/booking', {
-                            body: JSON.stringify(postBookingData),
-                            method: 'POST',
-                            headers: {
-                                'content-type': 'application/json'
-                            }
-                        }).then(res => res.json())
-                        .then(data => {
-                            if (data.ok) {
-                                window.location = '/booking';
-                                // console.log(data)
+                    } else {
+                        // post booking data
+                        let time;
+                        input.forEach(i => {
+                            if (i.checked) {
+                                time = i.value;
                             }
                         })
+
+                        let postBookingData = {
+                            attractionId: parseInt(window.location.pathname.split('/')[2], 10),
+                            date: input[0].value,
+                            time: time,
+                            price: parseInt(select('#amount').textContent.slice(3, 7), 10)
+                        };
+                        fetch('/api/booking', {
+                                body: JSON.stringify(postBookingData),
+                                method: 'POST',
+                                headers: {
+                                    'content-type': 'application/json'
+                                }
+                            }).then(res => res.json())
+                            .then(data => {
+                                if (data.ok) {
+                                    window.location = '/booking';
+                                    // console.log(data)
+                                }
+                            })
+                    }
                 }
             })
     })

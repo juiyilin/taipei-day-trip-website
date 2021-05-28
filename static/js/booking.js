@@ -41,9 +41,9 @@ function appendContents(bookData) {
     select('#date').textContent = bookData.date;
     //time
     if (bookData.time === 'morning') {
-        select('#time').textContent = '9:00-12:00';
+        select('#time').textContent = '早上 9 點到下午 4 點';
     } else {
-        select('#time').textContent = '13:00-16:00';
+        select('#time').textContent = '下午 2 點到晚上 9 點';
     }
     //amount
     let amounts = document.querySelectorAll('.amount');
@@ -80,12 +80,17 @@ function trashcan() {
 
 }
 
+
+
+
+
 let contents = document.querySelectorAll('.content');
 contents.forEach(content => content.style.display = 'none');
 let account;
+let bookdata;
 fetch('api/user').then(res => res.json())
     .then(data => {
-        if (data.data.id === null) {
+        if (data.data === null) {
             window.location = '/';
         } else {
             let username = select('#username');
@@ -106,6 +111,7 @@ fetch('api/user').then(res => res.json())
 
                     } else {
                         appendContents(data.data);
+                        bookdata = data.data
                     }
 
                 })

@@ -18,7 +18,7 @@ def book():
     json_data={}
     if 'id' in session:
         if request.method=='GET':
-            print('get')
+            print('get booking')
             print(session)
             if 'data' in session:
                 json_data['data']=session['data']
@@ -27,7 +27,7 @@ def book():
             print(json_data)
         
         elif request.method=='POST':
-            print('post')
+            print('post booking')
             print(request.json)
             if request.json['date']=='' or request.json['price']==None:
                 abort(400,'建立失敗')
@@ -56,7 +56,7 @@ def book():
         
                 
         elif request.method=='DELETE':
-            print('delete')
+            print('delete booking')
             session.pop('data')
             print(session)
             json_data['ok']=True

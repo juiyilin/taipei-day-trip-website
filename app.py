@@ -3,14 +3,17 @@ import jinja2
 from attraction_api import attraction
 from user_api import user_account
 from booking_api import booking
+from orders_api import order
 import os 
 
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
+app.config['SEND_FILE_MAX_AGE_DEFAULT']=0
 app.register_blueprint(attraction,url_prefix='/api')
 app.register_blueprint(user_account,url_prefix='/api')
 app.register_blueprint(booking,url_prefix='/api')
+app.register_blueprint(order,url_prefix='/api')
 app.secret_key = os.urandom(24)
 
 

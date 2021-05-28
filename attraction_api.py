@@ -17,10 +17,6 @@ def db_connect():
 	mycursor=conn.cursor()
 	return conn,mycursor
 
-def db_close(conn,mycursor):
-	mycursor.close()
-	conn.close()
-
 
 db=MySQLConnectionPool(
 	host='localhost',
@@ -56,7 +52,7 @@ def get_attraction():
 	else:
 		data=list(mycursor)
 		column_names=mycursor.column_names #tuple
-		db_close(conn,mycursor)
+		conn.close()
 		spots=[]
 		# print(data)
 		num_data=len(data)
@@ -94,7 +90,7 @@ def get_attraction_by_id(attractionid):
 		abort(500,'伺服器錯誤')
 	else:
 		column_names=mycursor.column_names #tuple
-		db_close(conn,mycursor)
+		conn.close()
 		spot=spot_handle(data,column_names)
 		result['data']=spot #data:{spot}
 	return jsonify(result),200

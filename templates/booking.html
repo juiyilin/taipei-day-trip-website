@@ -32,9 +32,19 @@
 <div class="container">
     <div class="content">
         <h3 class="line-height">信用卡付款資訊</h3>
-        <p class="line-height">卡片號碼：<input type="password"></p>
-        <p class="line-height">過期時間：<input type="text" placeholder="MM / YY"></p>
-        <p class="line-height">驗證密碼：<input type="text"></p>
+        <div class="credit-card">
+            <p class="line-height">卡片號碼：</p>
+            <div class="card-input" id="card-number"></div>
+        </div>
+        <div class="credit-card">
+            <p class="line-height">過期時間：</p>
+            <div class="card-input" id="card-expiration-date"></div>
+        </div>
+        <div class="credit-card">
+            <p class="line-height">驗證密碼：</p>
+            <div class="card-input" id="card-ccv"></div>
+        </div>
+
     </div>
 </div>
 <div class="container">
@@ -46,4 +56,6 @@
 {% endblock %}
 {% block js%}
 <script src="{{url_for('static',filename='js/booking.js')}}"></script>
+<script src="https://js.tappaysdk.com/tpdirect/v5.7.0"></script>
+<script src="{{url_for('static',filename='js/cashflow.js')}}"></script>
 {% endblock %}
