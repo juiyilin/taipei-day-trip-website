@@ -149,6 +149,10 @@
     font-weight: normal;
 }
 
+.date-period label {
+    cursor: pointer;
+}
+
 input[type=date] {
     padding: 2px;
 }

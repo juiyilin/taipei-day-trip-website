@@ -29,6 +29,8 @@ def book():
         elif request.method=='POST':
             print('post booking')
             print(request.json)
+            if 'data' in session:
+                session.pop('data')
             if request.json['date']=='' or request.json['price']==None:
                 abort(400,'建立失敗')
             try:
