@@ -1,5 +1,5 @@
 from mysql.connector.pooling import MySQLConnectionPool
-from data.dbconfig import user,password
+from config import user,password
 from flask import *
 attraction=Blueprint('attraction',__name__)
 
@@ -21,10 +21,10 @@ def db_connect():
 db=MySQLConnectionPool(
 	host='localhost',
 	user=user, 
-	password=password, # change config when upload
+	password=password, 
 	database='taipeispot',
 	pool_name='my_connection_pool',
-	pool_size=10,
+	pool_size=15,
 	pool_reset_session=True
 )
 select_spot='select * from spot'

@@ -39,6 +39,7 @@
 #search-icon {
     width: 60px;
     height: 46px;
+    border: #448899 solid 2px;
     background-color: #448899;
     border-radius: 0 5px 5px 0;
     display: flex;
@@ -48,9 +49,14 @@
     cursor: pointer;
 }
 
+#search-icon:hover {
+    border: #448899 solid 2px;
+    background-color: #366e7c;
+}
+
 #welcome {
     position: absolute;
-    right: 0;
+    right: -100px;
 }
 
 /* end banner */
@@ -74,11 +80,28 @@
     width: 100%;
 }
 
+
+
 .img img {
     object-fit: cover;
     width: 100%;
     height: 100%;
     border-radius: 5px 5px 0 0;
+}
+
+@keyframes white-cover {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.7;
+    }
+}
+
+.img img:hover {
+    opacity: 0.7;
+    animation: white-cover 0.3s;
 }
 
 
@@ -132,6 +155,12 @@
     }
 }
 
+@media (max-width:1425px) {
+    #welcome {
+        right: 0;
+    }
+}
+
 @media (max-width:1200px) {
 
     .width {
@@ -169,7 +198,7 @@
     #banner-img {
         background-image: url(/static/img/welcome\ 1.png);
         background-repeat: no-repeat;
-        background-position: bottom right -55px;
+        background-position: bottom right -80px;
         background-size: 90%;
         height: 100%;
         width: 100%;
@@ -200,6 +229,10 @@
     bottom: 30px;
     right: 30px;
     box-shadow: 1px 1px 2px #448899;
+}
+
+#to-top:hover {
+    background-color: #448899;
 }
 
 #arrow {

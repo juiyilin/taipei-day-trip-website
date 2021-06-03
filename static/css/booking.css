@@ -6,6 +6,8 @@
     padding-bottom: 70px;
 }
 
+
+
 .content * {
     color: #666666
 }
@@ -50,6 +52,14 @@
     line-height: 30px;
 }
 
+#tour-info p span:first-child {
+    font-weight: bold;
+}
+
+#tour-info p span {
+    font-weight: normal;
+}
+
 #delete {
     position: absolute;
     right: 0;
@@ -87,23 +97,32 @@ input {
     border-radius: 5px;
     border: 1px solid #E8E8E8;
     height: 30px;
-    width: 250px;
+    width: 200px;
 }
+
+
 
 .container:nth-child(5) .content {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    border-bottom: none;
+
 }
 
 #btn {
     background-color: #448899;
+    border: none;
     border-radius: 5px;
     color: #ffffff;
-    width: 154px;
+    width: 170px;
     height: 36px;
     line-height: 37px;
     text-align: center;
     font-size: 19px;
     cursor: pointer;
+}
+
+#btn:hover {
+    background-color: #366e7c;
 }

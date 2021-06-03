@@ -112,20 +112,29 @@ function clickChangeImg(domId) {
 
 function book() {
     let bookingBtn = select('#booking-btn');
-    bookingBtn.addEventListener('click', function () {
+    let bookingForm = select('#booking-form');
+
+    bookingForm.addEventListener('submit', function (event) {
+        event.preventDefault();
         // check login
         fetch('/api/user').then(res => res.json())
             .then(data => {
-                if (data.data.id === null) {
+                if (data.data === null) {
                     signinup.click();
                 } else {
                     let input = document.querySelectorAll('#booking-form input');
 
-                    // check filled
+                    // check if current date > input date
                     let bookingMessage = select('#booking-message');
                     bookingMessage.textContent = '';
-                    if (input[0].value === '' | (input[1].checked === input[2].checked)) {
-                        bookingMessage.textContent = '請確認是否已選擇日期與時間';
+                    let now = new Date(Date.now())
+                    let inputDate = new Date(input[0].value)
+                    // get current year, month, date
+                    let currentDate = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+                    inputDate = new Date(inputDate.getFullYear(), inputDate.getMonth(), inputDate.getDate())
+
+                    if (currentDate >= inputDate) {
+                        bookingMessage.textContent = '請選擇大於今天的日期';
                         bookingMessage.style.color = 'red';
                     } else {
                         // post booking data

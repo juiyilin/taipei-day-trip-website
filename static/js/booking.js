@@ -111,7 +111,7 @@ fetch('api/user').then(res => res.json())
 
                     } else {
                         appendContents(data.data);
-                        bookdata = data.data
+                        bookdata = data.data;
                     }
 
                 })
