@@ -51,7 +51,7 @@ def orders():
                 abort(400,'訂單建立失敗')
             
             # check email
-            if '@' not in request.json['email']:
+            if '@' not in request.json['order']['contact']['email']:
                 abort(400,'訂單建立失敗')
 
             # create order
