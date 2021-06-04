@@ -1,19 +1,19 @@
 .content {
-    margin-top: 50px;
-    padding: 0 10px 30px 10px;
+    margin-top: 85px;
+    padding: 0 10px 80px 10px;
     color: #666666;
 }
 
 /* up side */
 .img {
-    width: 50%;
+    width: 48%;
     height: 406px;
     position: relative;
 }
 
 .img>img {
     object-fit: cover;
-    width: 96%;
+    width: 100%;
     height: 100%;
     border-radius: 5px;
 }
@@ -30,7 +30,7 @@
 }
 
 .arrow:hover {
-    background-color: #448899;
+    background-color: #66AABB;
     opacity: 1;
 }
 
@@ -39,7 +39,7 @@
 }
 
 #next-img {
-    right: 25px;
+    right: 5px;
 }
 
 .arrow>div {
@@ -122,7 +122,7 @@
     background-color: #e8e8e8;
     border-radius: 5px;
     height: 75%;
-    padding-left: 18px;
+    padding: 0 18px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -132,9 +132,25 @@
     font-size: 16px;
 }
 
+#booking-form>p:nth-child(odd) {
+    font-weight: bold;
+}
+
 .date-period {
     display: flex;
     flex-direction: row;
+}
+
+.date-period p {
+    font-weight: bold;
+}
+
+#amount {
+    font-weight: normal;
+}
+
+.date-period label {
+    cursor: pointer;
 }
 
 input[type=date] {
@@ -158,6 +174,7 @@ input[type=radio]:checked {
 
 #booking-btn {
     background-color: #448899;
+    border: 1px solid transparent;
     border-radius: 5px;
     color: #ffffff;
     width: 154px;
@@ -166,6 +183,10 @@ input[type=radio]:checked {
     text-align: center;
     font-size: 19px;
     cursor: pointer;
+}
+
+#booking-btn:hover {
+    background-color: #366e7c;
 }
 
 @media(max-width:900px) {
@@ -179,10 +200,6 @@ input[type=radio]:checked {
 
     .img>img {
         width: 100%;
-    }
-
-    #next-img {
-        right: 2%;
     }
 
     #profile {

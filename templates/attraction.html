@@ -23,20 +23,20 @@
                 <h3 id="name"></h3>
                 <div id="category-mrt"></div>
             </div>
-            <div id="booking-form">
+            <form id="booking-form">
                 <p>訂購導覽行程</p>
                 <p>以此景點為中心的一日行程，帶您探索城市角落故事</p>
                 <div class="date-period">
-                    <p>選擇日期：</p><input type="date">
+                    <p>選擇日期：</p><input type="date" required>
                 </div>
                 <div class="date-period">
                     <p>選擇時間：</p>
-                    <label><input type="radio" name="period" value="morning">上半天</label>
+                    <label><input type="radio" name="period" value="morning" required>上半天</label>
                     <label><input type="radio" name="period" value="afternoon">下半天</label>
                 </div>
                 <p>導覽費用：<span id="amount">請選擇時間</span></p>
-                <div id=booking-btn type="submit">開始預訂行程</div><span id=booking-message></span>
-            </div>
+                <button id=booking-btn type="submit">開始預訂行程</button><span id=booking-message></span>
+            </form>
         </div>
     </div>
 </div>

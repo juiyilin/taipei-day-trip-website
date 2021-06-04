@@ -102,12 +102,12 @@ btn.addEventListener('click', function () {
                     if (data.data.payment.status === 0) {
                         window.location = `/thankyou?number=${data.data.number}`;
                     } else {
-                        alert('付款失敗')
+                        alert(`付款失敗\n錯誤代號：${data.data.payment.status}\n錯誤訊息：${data.data.payment.message}`);
                     }
                 })
         })
     } else {
-        alert('請確認每個欄位是否填寫正確')
+        alert('請確認每個欄位是否填寫正確');
 
     }
 

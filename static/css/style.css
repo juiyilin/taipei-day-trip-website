@@ -71,10 +71,17 @@ input {
 }
 
 #top-right li {
-    padding: 0 10px;
     width: 80px;
-    text-align: right;
+    text-align: center;
     cursor: pointer;
+    margin-right: 5px;
+    line-height: 16px;
+    padding: 2px 0;
+}
+
+#top-right li:hover {
+    border-bottom: 2px solid #448899;
+    margin-bottom: -2px;
 }
 
 @media (max-width:380px) {
@@ -122,7 +129,7 @@ input {
     }
 }
 
-.popup>div {
+.popup>form {
     width: 320px;
     border-top: solid #448899 10px;
     position: fixed;
@@ -159,6 +166,7 @@ input {
     cursor: pointer;
 }
 
+
 .login {
     height: 46px;
     width: 95%;
@@ -177,6 +185,12 @@ input {
     text-align: center;
     font-size: 19px;
     cursor: pointer;
+}
+
+#login-btn:hover,
+#signup-btn:hover {
+    background-color: #366e7c;
+    border: #366e7c solid 3px;
 }
 
 .switch {

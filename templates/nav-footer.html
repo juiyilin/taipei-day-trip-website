@@ -27,23 +27,23 @@
 
     <div id="popup-background"></div>
     <div class="popup">
-        <div id="login-block">
+        <form id="login-block">
             <div class="popup-title">登入會員帳號</div>
             <img class="close" src="../static/img/icon_close.png" alt="">
-            <input type="email" class="login" placeholder="輸入電子信箱">
-            <input type="password" class="login" placeholder="輸入密碼">
-            <button class="login" id="login-btn">登入帳戶</button>
+            <input type="email" class="login" placeholder="輸入電子信箱" required>
+            <input type="password" class="login" placeholder="輸入密碼" required>
+            <button type="submit" class="login" id="login-btn">登入帳戶</button>
             <p>還沒有帳戶？<span class="switch">點此註冊</span></p>
-        </div>
-        <div id="signup-block">
+        </form>
+        <form id="signup-block">
             <div class="popup-title">註冊會員帳號</div>
             <img src="../static/img/icon_close.png" alt="" class="close">
-            <input type="text" class="login" placeholder="輸入姓名">
-            <input type="email" class="login" placeholder="輸入電子信箱">
-            <input type="password" class="login" placeholder="輸入密碼">
-            <button class="login" id="signup-btn">註冊新帳戶</button>
+            <input type="text" class="login" placeholder="輸入姓名" required>
+            <input type="email" class="login" placeholder="輸入電子信箱" required>
+            <input type="password" class="login" placeholder="輸入密碼" required>
+            <button type="submit" class="login" id="signup-btn">註冊新帳戶</button>
             <p>已經有帳戶了？<span class="switch">點此登入</span></p>
-        </div>
+        </form>
     </div>
     <script src="{{url_for('static',filename='js/signinout.js')}}"></script>
     {% block js%}{% endblock %}

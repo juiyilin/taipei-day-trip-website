@@ -44,7 +44,7 @@ def input_error(error):
 	result={}
 	result['error']=True
 	result['message']=error.description
-	return jsonify(result), 400
+	return jsonify(result), 403
 
 @app.errorhandler(500)
 def server_error(error):
@@ -52,6 +52,6 @@ def server_error(error):
 	result['error']=True
 	result['message']=error.description
 	return jsonify(result),500
-    
-    
-app.run(host="0.0.0.0", port=3000)#,debug=True)
+
+if __name__ == "__main__":
+	app.run()

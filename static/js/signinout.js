@@ -101,45 +101,39 @@ fetch(userApi)
     })
 
 // post
-let signupBtn = document.getElementById('signup-btn');
-signupBtn.addEventListener('click', function () {
+signupBlock.addEventListener('submit', function (event) {
+    event.preventDefault();
     let input = document.querySelectorAll('#signup-block>input');
+    let postData = {
+        name: input[0].value,
+        email: input[1].value,
+        password: input[2].value
+    };
+    fetch(userApi, {
+            body: JSON.stringify(postData),
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(res => res.json())
+        .then(data => {
+            removeMessage();
+            if (data.ok) {
+                clearInputValue();
+                insertMessage('註冊成功，重新整理', 'green', signupBlock);
+                setTimeout(() => {
+                    window.location.reload()
+                }, 1000);
+            } else {
+                insertMessage(data.message, 'red', signupBlock);
+            }
+        })
 
-    // check email
-    if (!input[1].value.includes('@')) {
-        removeMessage();
-        insertMessage('電子郵件須包含@', 'red', signupBlock);
-    } else {
-        let postData = {
-            name: input[0].value,
-            email: input[1].value,
-            password: input[2].value
-        };
-        fetch(userApi, {
-                body: JSON.stringify(postData),
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                }
-            }).then(res => res.json())
-            .then(data => {
-                removeMessage();
-                if (data.ok) {
-                    clearInputValue();
-                    insertMessage('註冊成功，重新整理', 'green', signupBlock);
-                    setTimeout(() => {
-                        window.location.reload()
-                    }, 1000);
-                } else {
-                    insertMessage(data.message, 'red', signupBlock);
-                }
-            })
-    }
 })
 
 //patch
-let loginBtn = document.getElementById('login-btn');
-loginBtn.addEventListener('click', function () {
+loginBlock.addEventListener('submit', function (event) {
+    event.preventDefault();
     let input = document.querySelectorAll('#login-block>input');
     let patchData = {
         email: input[0].value,

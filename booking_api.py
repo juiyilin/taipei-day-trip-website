@@ -1,15 +1,16 @@
 from flask import *
 from mysql.connector.pooling import MySQLConnectionPool
-from data.dbconfig import user,password
+from config import user,password
+
 booking=Blueprint('booking',__name__)
 
 db=MySQLConnectionPool(
 	host='localhost',
 	user=user, 
-	password=password, # change config when upload
+	password=password, 
 	database='taipeispot',
 	pool_name='my_connection_pool',
-	pool_size=10,
+	pool_size=15,
 	pool_reset_session=True
 )
 
@@ -19,7 +20,6 @@ def book():
     if 'id' in session:
         if request.method=='GET':
             print('get booking')
-            print(session)
             if 'data' in session:
                 json_data['data']=session['data']
             else:
@@ -29,6 +29,8 @@ def book():
         elif request.method=='POST':
             print('post booking')
             print(request.json)
+            if 'data' in session:
+                session.pop('data')
             if request.json['date']=='' or request.json['price']==None:
                 abort(400,'建立失敗')
             try:
