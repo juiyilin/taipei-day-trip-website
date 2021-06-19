@@ -67,7 +67,7 @@ function showContents() {
 function trashcan() {
     let trashcan = select('#delete');
     trashcan.addEventListener('click', function () {
-        fetch('api/booking', {
+        fetch('/api/booking', {
                 method: 'DELETE',
             }).then(res => res.json())
             .then(data => {

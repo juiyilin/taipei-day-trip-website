@@ -4,16 +4,18 @@ from attraction_api import attraction
 from user_api import user_account
 from booking_api import booking
 from orders_api import order
+from post import posts
 import os 
 
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
-app.config['SEND_FILE_MAX_AGE_DEFAULT']=0
+# app.config['SEND_FILE_MAX_AGE_DEFAULT']=0
 app.register_blueprint(attraction,url_prefix='/api')
 app.register_blueprint(user_account,url_prefix='/api')
 app.register_blueprint(booking,url_prefix='/api')
 app.register_blueprint(order,url_prefix='/api')
+app.register_blueprint(posts,url_prefix='/')
 app.secret_key = os.urandom(24)
 
 
@@ -30,6 +32,14 @@ def booking():
 @app.route("/thankyou")
 def thankyou():
 	return render_template("thankyou.html")
+
+@app.route('/order/',defaults={'orderNumber':''})
+@app.route('/order/<orderNumber>')
+def order(orderNumber):
+	if orderNumber=='':
+	   	return render_template("order.html")
+	else:
+		return render_template("ordernumber.html",orderNumber=orderNumber)
 
 # error handle
 @app.errorhandler(400)
@@ -54,4 +64,4 @@ def server_error(error):
 	return jsonify(result),500
 
 if __name__ == "__main__":
-	app.run()
+	app.run(host='0.0.0.0',port=3000)#,debug=True)

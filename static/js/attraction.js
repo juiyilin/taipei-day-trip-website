@@ -22,7 +22,7 @@ function render(data) {
     // console.log(data)
     // <img>
     imgs = data.data.images;
-    let image = select('img');
+    let image = select('.img img');
     image.src = imgs[0];
     imgDot(0);
 
@@ -43,7 +43,11 @@ function render(data) {
     let infors = document.querySelectorAll('#infors>p');
     infors[0].textContent = data.data.description;
     infors[1].textContent = data.data.address;
-    infors[2].textContent = data.data.transport;
+    if (data.data.transport !== null) {
+        infors[2].textContent = data.data.transport;
+    } else {
+        infors[2].textContent = '-'
+    }
 }
 
 function imgDot(now) {
@@ -61,7 +65,7 @@ function imgDot(now) {
 }
 
 function changeImage(id) {
-    let image = select('img');
+    let image = select('.img img');
     let nowIdx = imgs.indexOf(image.src);
     if (id === 'next-img') {
         if (nowIdx + 1 == imgs.length) {

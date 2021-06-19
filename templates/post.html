@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圖文留言板</title>
+</head>
+
+<body>
+    <h1>圖文留言板</h1>
+    <form action="/post" method="post" enctype=multipart/form-data> 文字內容：<input type="text" name="text" required>
+        <br>
+        圖片檔案：<input type="file" name='file' accept="image/*">
+        <br>
+        <button type="submit">送出</button>
+        <!-- <input type='submit' value='送出'> -->
+    </form>
+    {% for post in posts %}
+    <hr>
+    留言：{{post.text}}
+    <br>
+    圖片：<img src="{{post.img_link}}" alt="">
+    {% endfor %}
+
+</body>
+
+</html>

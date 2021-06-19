@@ -121,7 +121,28 @@ def get_order(orderNumber):
     else:
         json_data={}
         if orderNumber=='':
-            json_data['data']=None
+            conn,mycursor=db_connect()
+            mycursor.execute('SELECT * FROM orders WHERE user_id=%s',(session["id"],))
+            get_all=mycursor.fetchall()
+            conn.close()
+            # print(get_all[0])
+            print(get_all)
+            if get_all==[]:
+                json_data['data']=[]
+            else:
+                order_list=[]
+                for order in get_all:
+                    data={}
+                    trip=json.loads(order[2])
+                    data['number']=order[0]
+                    data['price']=trip['price']
+                    data['trip']=trip['trip']['attraction']['name']
+                    data['date']=trip['trip']['date']
+                    data['status']=order[3]
+                    order_list.append(data)
+                order_list.reverse()
+                json_data['data']=order_list
+            # print(json_data)
         else:
             conn,mycursor=db_connect()
             mycursor.execute('SELECT number, trip_order, status FROM orders WHERE user_id=%s AND number=%s',(session["id"],orderNumber))
