@@ -20,6 +20,8 @@
                 <li id="booking">預定行程</li>
                 <li id="signinup"></li>
             </div>
+            <img id="nav-close" src="{{url_for('static',filename='img/icon_close.png')}}" alt="">
+            <img id="hamburger" src="{{url_for('static',filename='img/iconfinder_menu_1814109.png')}}" alt="">
         </nav>
     </div>
 
@@ -44,12 +46,14 @@
             <button type="submit" class="login" id="signup-btn">註冊新帳戶</button>
             <p>已經有帳戶了？<span class="switch">點此登入</span></p>
         </form>
+        <footer>
+            <p>COPYRIGHT © 2021 台北一日遊</p>
+        </footer>
     </div>
+
+
     <script src="{{url_for('static',filename='js/signinout.js')}}"></script>
     {% block js%}{% endblock %}
-    <footer>
-        <p>COPYRIGHT © 2021 台北一日遊</p>
-    </footer>
 
 </body>
 

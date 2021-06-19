@@ -16,6 +16,7 @@ p {
     color: #448899;
 }
 
-a#home {
+a#home,
+p a {
     color: #448899;
 }

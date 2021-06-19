@@ -1,0 +1,27 @@
+{% extends 'nav-footer.html' %}
+{% block custom_css%}
+<link rel="stylesheet" href="{{url_for('static',filename='css/ordernumber.css')}}">
+{% endblock %}
+{% block content%}
+<div class="container">
+    <div class="content">
+        <div id="tour">
+            <img id="spot-img" src="" alt="">
+            <div id="tour-info" class="bold">
+                <p>訂單號碼：<span id="number"></span></p>
+                <p>狀態：<span id="status"></span></p>
+                <p>景點：<span id="name"></span></p>
+                <p>日期：<span id="date"></span></p>
+                <p>時間：<span id="time"></span></p>
+                <p>費用：新台幣<span class="amount"></span>元</p>
+                <p>地點：<span id="address"></span></p>
+                <p><a id="info">景點詳細資訊</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js%}
+<script src="{{url_for('static',filename='js/ordernumber.js')}}"></script>
+{% endblock %}

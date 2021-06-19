@@ -33,6 +33,14 @@ def booking():
 def thankyou():
 	return render_template("thankyou.html")
 
+@app.route('/order/',defaults={'orderNumber':''})
+@app.route('/order/<orderNumber>')
+def order(orderNumber):
+	if orderNumber=='':
+	   	return render_template("order.html")
+	else:
+		return render_template("ordernumber.html",orderNumber=orderNumber)
+
 # error handle
 @app.errorhandler(400)
 def input_error(error):
@@ -56,4 +64,4 @@ def server_error(error):
 	return jsonify(result),500
 
 if __name__ == "__main__":
-	app.run(host='localhost',port=3000,debug=True)
+	app.run(host='0.0.0.0',port=3000)#,debug=True)

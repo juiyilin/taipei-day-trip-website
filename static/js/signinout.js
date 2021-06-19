@@ -47,7 +47,7 @@ function insertMessage(message, color, block) {
 }
 
 
-
+let booking = document.getElementById('booking');
 let signinup = document.querySelector('#signinup');
 let popupBackground = document.getElementById('popup-background');
 let loginBlock = document.getElementById('login-block');
@@ -80,6 +80,22 @@ fetch(userApi)
     .then(jsdata => jsdata.json())
     .then(data => {
         if (data.data !== null) {
+            //顯示歷史訂購
+            let order = document.createElement('li');
+            order.id = 'order';
+            order.textContent = '訂購紀錄';
+            signinup.parentElement.insertBefore(order, booking);
+            order.addEventListener('click', function () {
+                fetch(userApi).then(res => res.json())
+                    .then(data => {
+                        if (data.data === null) {
+                            window.location = '/'
+                        } else {
+                            window.location = '/order/';
+                        }
+                    })
+            })
+            //登入/註冊改成登出系統
             signinup.textContent = '登出系統';
             signinup.removeEventListener('click', showPopup);
             signinup.id = 'logout';
@@ -158,8 +174,19 @@ loginBlock.addEventListener('submit', function (event) {
         })
 })
 
+// small size, click hamburger to show nav
+let hamburger = document.querySelector('#hamburger');
+let navClose = document.querySelector('#nav-close');
+hamburger.addEventListener('click', function () {
+    document.querySelector('#top-right').style.display = 'block';
+    navClose.style.display = 'block';
+})
+navClose.addEventListener('click', function () {
+    document.querySelector('#top-right').style.display = 'none';
+    navClose.style.display = 'none';
+})
+
 // booking
-let booking = document.getElementById('booking');
 booking.addEventListener('click', function () {
     fetch(userApi).then(res => res.json())
         .then(data => {

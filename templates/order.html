@@ -1,0 +1,15 @@
+{% extends 'nav-footer.html'%}
+{% block custom_css%}
+<link rel="stylesheet" href="{{url_for('static',filename='css/orders.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="content">
+        <h3>您好，<span id="username"></span>，您曾訂購的行程如下：</h3>
+    </div>
+</div>
+{% endblock %}
+{% block js%}
+<script src="{{url_for('static',filename='js/orders.js')}}"></script>
+{% endblock %}

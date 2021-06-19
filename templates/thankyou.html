@@ -8,6 +8,7 @@
         <p></p>
         <p id="order-number"></p>
         <p></p>
+        <br>
         <a id="home" href="/">返回首頁</a>
     </div>
 </div>
@@ -20,7 +21,7 @@
                 let orderNumber = document.querySelector('#order-number');
                 let paragraph = document.querySelectorAll('p');
                 paragraph[0].textContent = '付款完成，感謝您的訂購，訂單號碼如下：';
-                paragraph[2].textContent = '相關資訊可於訂購紀錄中查詢';
+                paragraph[2].innerHTML = '訂單資訊可於<a href="/order/">訂購紀錄</a>中查詢';
                 const queryString = new URLSearchParams(window.location.search);
                 orderNumber.textContent = queryString.get('number');
             }

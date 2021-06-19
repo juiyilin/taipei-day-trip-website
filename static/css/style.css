@@ -57,7 +57,8 @@ input {
     display: flex;
     color: #666666;
     justify-content: flex-end;
-
+    align-items: center;
+    height: 80%;
 }
 
 #top-right a {
@@ -75,13 +76,59 @@ input {
     text-align: center;
     cursor: pointer;
     margin-right: 5px;
-    line-height: 16px;
     padding: 2px 0;
 }
 
 #top-right li:hover {
     border-bottom: 2px solid #448899;
     margin-bottom: -2px;
+}
+
+#nav-close {
+    display: none;
+}
+
+#hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+@media (max-width:450px) {
+    #top-right {
+        border: 1px solid #e8e8e8;
+        flex-direction: column;
+        justify-content: flex-start;
+        position: fixed;
+        height: 100%;
+        right: 0;
+        top: 0;
+        background-color: #ffffff;
+        display: none;
+    }
+
+    #top-right li {
+        margin: 5px;
+        border-bottom: 1px solid #e8e8e8;
+
+    }
+
+    #top-right li:hover {
+        border-bottom: 2px solid #448899;
+        margin-bottom: -1px;
+    }
+
+    #nav-close {
+        display: none;
+        position: absolute;
+        top: 10px;
+        right: 100px;
+        cursor: pointer;
+    }
+
+    #hamburger {
+        display: block;
+        height: 80%;
+    }
 }
 
 @media (max-width:380px) {
@@ -196,6 +243,10 @@ input {
 .switch {
     cursor: pointer;
     text-decoration: underline;
+}
+
+.switch:hover {
+    color: #448899;
 }
 
 /* end login block */
