@@ -4,7 +4,6 @@ from attraction_api import attraction
 from user_api import user_account
 from booking_api import booking
 from orders_api import order
-from post import posts
 import os 
 
 app=Flask(__name__)
@@ -15,7 +14,6 @@ app.register_blueprint(attraction,url_prefix='/api')
 app.register_blueprint(user_account,url_prefix='/api')
 app.register_blueprint(booking,url_prefix='/api')
 app.register_blueprint(order,url_prefix='/api')
-app.register_blueprint(posts,url_prefix='/')
 app.secret_key = os.urandom(24)
 
 

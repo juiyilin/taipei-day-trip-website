@@ -1,9 +1,9 @@
-# [旅遊電商網站]([http://35.72.79.89/])  
+# [旅遊電商網站](http://35.72.79.89/)  
 ![](https://user-images.githubusercontent.com/52588493/122661681-719ceb00-d1bf-11eb-881f-033fc0e95e5a.png)
 ## 使用技術
-- frontend: HTML, css, JavaScript(RWD)  
-- backend: Python(Flask)  
-- database: MySQL  
+- Frontend: HTML, css, JavaScript(RWD)  
+- Backend: Python(Flask)  
+- Database: MySQL  
 - Amazon Web Service: EC2  
 - Nginx  
 - TapPay  
