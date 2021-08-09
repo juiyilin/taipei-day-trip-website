@@ -1,6 +1,6 @@
-from mysql.connector.pooling import MySQLConnectionPool
-from config import user,password
 from flask import *
+from database import db_connect,db_close,db
+
 attraction=Blueprint('attraction',__name__)
 
 def spot_handle(data,column_names):
@@ -12,21 +12,7 @@ def spot_handle(data,column_names):
 		spot[key]=d
 	return spot
 
-def db_connect():
-	conn=db.get_connection()
-	mycursor=conn.cursor()
-	return conn,mycursor
 
-
-db=MySQLConnectionPool(
-	host='localhost',
-	user=user, 
-	password=password, 
-	database='taipeispot',
-	pool_name='my_connection_pool',
-	pool_size=15,
-	pool_reset_session=True
-)
 select_spot='select * from spot'
 
 @attraction.route('/attractions')
@@ -48,11 +34,13 @@ def get_attraction():
 		mycursor.execute(select)
 	
 	except:
+		db_close(conn,mycursor)
 		abort(500)
 	else:
 		data=list(mycursor)
 		column_names=mycursor.column_names #tuple
-		conn.close()
+		db_close(conn,mycursor)
+
 		spots=[]
 		# print(data)
 		num_data=len(data)
@@ -87,10 +75,12 @@ def get_attraction_by_id(attractionid):
 		data=list(list(mycursor)[0])
 	
 	except:
+		db_close(conn,mycursor)
 		abort(500,'伺服器錯誤')
 	else:
 		column_names=mycursor.column_names #tuple
-		conn.close()
+		db_close(conn,mycursor)
+
 		spot=spot_handle(data,column_names)
 		result['data']=spot #data:{spot}
 	return jsonify(result),200

@@ -3,27 +3,13 @@ import time
 from datetime import datetime
 import urllib.request
 import json
-from mysql.connector.pooling import MySQLConnectionPool
-from config import user,password,partner_key
+from database import db_connect,db_close,db
+from config import partner_key
 
 
-
-def db_connect():
-	conn=db.get_connection()
-	mycursor=conn.cursor()
-	return conn,mycursor
 
 order=Blueprint('orders',__name__)
 
-db=MySQLConnectionPool(
-	host='localhost',
-	user=user, 
-	password=password, # change config when upload
-	database='taipeispot',
-	pool_name='my_connection_pool',
-	pool_size=15,
-	pool_reset_session=True
-)
 
 def compare_date(post_date):
     input_date_list=list(map(int,post_date.split('-')))
@@ -61,6 +47,7 @@ def orders():
                 trip_order=str(request.json['order']).replace("'",'"')
                 mycursor.execute("INSERT INTO orders (number, user_id, trip_order, status) VALUES(%s,%s,%s,1)",(number,session_id,trip_order))
             except:
+                db_close(conn,mycursor)
                 abort(400,'訂單建立失敗')
             else:
                 conn.commit()
@@ -106,7 +93,7 @@ def orders():
             else:
                 print('付款失敗')
 
-            conn.close()
+            db_close(conn,mycursor)
             return jsonify(json_data),200
         else:
             abort(500)
@@ -124,7 +111,8 @@ def get_order(orderNumber):
             conn,mycursor=db_connect()
             mycursor.execute('SELECT * FROM orders WHERE user_id=%s',(session["id"],))
             get_all=mycursor.fetchall()
-            conn.close()
+            db_close(conn,mycursor)
+
             # print(get_all[0])
             print(get_all)
             if get_all==[]:
@@ -133,6 +121,7 @@ def get_order(orderNumber):
                 order_list=[]
                 for order in get_all:
                     data={}
+                    print('error',order)
                     trip=json.loads(order[2])
                     data['number']=order[0]
                     data['price']=trip['price']
@@ -147,7 +136,8 @@ def get_order(orderNumber):
             conn,mycursor=db_connect()
             mycursor.execute('SELECT number, trip_order, status FROM orders WHERE user_id=%s AND number=%s',(session["id"],orderNumber))
             get_one=mycursor.fetchone()
-            conn.close()
+            db_close(conn,mycursor)
+
             if get_one==None:
                 json_data['data']=None
             else:

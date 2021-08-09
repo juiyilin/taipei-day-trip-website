@@ -1,18 +1,8 @@
 from flask import *
-from mysql.connector.pooling import MySQLConnectionPool
-from config import user,password
+from database import db_connect,db_close,db
 
 booking=Blueprint('booking',__name__)
 
-db=MySQLConnectionPool(
-	host='localhost',
-	user=user, 
-	password=password, 
-	database='taipeispot',
-	pool_name='my_connection_pool',
-	pool_size=15,
-	pool_reset_session=True
-)
 
 @booking.route('/booking',methods=['GET','POST','DELETE'])
 def book():
@@ -34,14 +24,15 @@ def book():
             if request.json['date']=='' or request.json['price']==None:
                 abort(400,'建立失敗')
             try:
-                conn=db.get_connection()
-                mycursor=conn.cursor()
+                conn, mycursor=db_connect()
                 mycursor.execute(f'select id,name,address,images from spot where id like {request.json["attractionId"]}')
             except:
+                db_close(conn,mycursor)
                 abort(500)
             db_spot=mycursor.fetchone()
             column_name=mycursor.column_names
-            conn.close()
+            db_close(conn,mycursor)
+
             book_data={}
             attraction={}
             for column,info in zip(column_name,db_spot):
