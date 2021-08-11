@@ -1,17 +1,20 @@
-# [旅遊電商網站](http://35.72.79.89/)  
-![](https://user-images.githubusercontent.com/52588493/122661681-719ceb00-d1bf-11eb-881f-033fc0e95e5a.png)
+# [旅遊電商網站](http://35.72.79.89:3000/)  
+![](https://user-images.githubusercontent.com/52588493/122661681-719ceb00-d1bf-11eb-881f-033fc0e95e5a.png)  
+
+## 資料庫設計  
+![](https://user-images.githubusercontent.com/52588493/128993719-79256b48-a570-488b-84fb-31a64abf597c.png)  
+
 ## 使用技術
-- Frontend: HTML, css, JavaScript(RWD)  
-- Backend: Python(Flask)  
+- Frontend: HTML, css, JavaScript ( RWD )  
+- Backend: Python ( Flask )  
 - Database: MySQL  
-- Amazon Web Service: EC2  
-- Nginx  
-- TapPay  
+- Amazon Web Service: EC2    
+- TapPay ( 第三方金流 )  
 ##  
 
-網站頁面使用[台北各景點資料](/data/taipei-attractions.json)串接TapPay金流服務，部署於雲端伺服器AWS EC2，將使用者與訂單資訊儲存於EC2上之MySQL中，採RESTful API架構取得所需資料。  
+網站頁面使用[台北各景點資料](/data/taipei-attractions.json)串接 TapPay 金流服務，部署於雲端伺服器 AWS EC2，將使用者與訂單資訊儲存於 EC2 上之 MySQL 中，採 RESTful API 架構取得所需資料。  
 
-網址：[http://35.72.79.89/](http://35.72.79.89/)  
+網址：[http://35.72.79.89:3000/](http://35.72.79.89:3000/)
 測試帳號：test@test.test  
 測試密碼：test  
 
@@ -23,7 +26,7 @@ Tappay 測試卡號 : 4242 4242 4242 4242
 登入前畫面  
 ![登入前畫面](https://user-images.githubusercontent.com/52588493/122664861-6f925680-d1d6-11eb-9720-ddd6055f4f7e.png)  
 
-登入後畫面(選單變化)  
+登入後畫面 ( 選單變化 )  
 ![登入後畫面](https://user-images.githubusercontent.com/52588493/122664877-8e90e880-d1d6-11eb-891e-a900f314d515.png)  
 #  
 景點搜尋  
