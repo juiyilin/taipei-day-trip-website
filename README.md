@@ -12,7 +12,7 @@
 - TapPay ( 第三方金流 )  
 ##  
 
-網站頁面使用[台北各景點資料](/data/taipei-attractions.json)串接 TapPay 金流服務，部署於雲端伺服器 AWS EC2，將使用者與訂單資訊儲存於 EC2 上之 MySQL 中，採 RESTful API 架構取得所需資料。  
+網站頁面使用[台北各景點資料](/data/taipei-attractions.json)串接 TapPay 金流服務，佈署於雲端伺服器 AWS EC2，將使用者與訂單資訊儲存於 EC2 上之 MySQL 中，採 RESTful API 架構取得所需資料。  
 
 網址：[http://35.72.79.89:3000/](http://35.72.79.89:3000/)
 測試帳號：test@test.test  
