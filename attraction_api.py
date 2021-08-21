@@ -23,7 +23,7 @@ def get_attraction():
 	try:
 		page=int(page)					
 		# 筆數			
-		conn,mycursor=db_connect()
+		conn,mycursor=db_connect(db)
 		mycursor.execute(f'select count(*) from spot where name like "%{keyword}%"')
 		num=mycursor.fetchone()[0]
 		
@@ -70,7 +70,7 @@ def get_attraction_by_id(attractionid):
 		result={}
 		select=f'{select_spot} where id ={attractionid}'
 	try:
-		conn,mycursor=db_connect()
+		conn,mycursor=db_connect(db)
 		mycursor.execute(select)
 		data=list(list(mycursor)[0])
 	

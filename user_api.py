@@ -1,18 +1,9 @@
 from flask import *
-from mysql.connector.pooling import MySQLConnectionPool
-from config import user,password
+from database import db_connect,db_close,db
 
 user_account=Blueprint('user',__name__)
 
-db=MySQLConnectionPool(
-	host='localhost',
-	user=user, 
-	password=password, 
-	database='taipeispot',
-	pool_name='my_connection_pool',
-	pool_size=15,
-	pool_reset_session=True
-)
+
 select_user='select * from user'
 @user_account.route('/user', methods=['GET', 'POST', 'PATCH', 'DELETE'])
 def check_user():
@@ -29,8 +20,7 @@ def check_user():
         
     elif request.method=='POST':
         print('post user')
-        conn=db.get_connection()
-        mycursor=conn.cursor()
+        conn, mycursor=db_connect(db)
         name=request.json['name']
         email=request.json['email']
         password=request.json['password']
@@ -39,7 +29,7 @@ def check_user():
         try:
             mycursor.execute(select_user+" where email like %s",(email,))
         except:
-            conn.close()
+            db_close(conn,mycursor)
             abort(500,'伺服器錯誤') #return error
         else:
             get_first=mycursor.fetchone()
@@ -55,24 +45,25 @@ def check_user():
                     session[key]=value
                 json_data['ok']=True
             else:
-                conn.close()
+                db_close(conn,mycursor)
                 abort(400,'信箱已有人使用或其他原因') #return error
         
     elif request.method=='PATCH':
         print('patch user')
-        conn=db.get_connection()
-        mycursor=conn.cursor()
+        conn, mycursor=db_connect(db)
         email=request.json['email']
         password=request.json['password']
         if '@' not in email:
+            db_close(conn,mycursor)
             abort(400,'帳號或密碼錯誤或其他原因')
         try:
             mycursor.execute(select_user+' where email like %s and password like %s',(email,password))
         except:
+            db_close(conn,mycursor)
             abort(500,'伺服器錯誤') #return error
         else:
             get_first=mycursor.fetchone()
-            conn.close()
+            db_close(conn,mycursor)
             if get_first==None:
                 abort(400,'帳號或密碼錯誤或其他原因') #return error
             else:

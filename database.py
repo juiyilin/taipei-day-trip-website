@@ -1,7 +1,7 @@
 from mysql.connector.pooling import MySQLConnectionPool
 from config import user,password
 
-def db_connect():
+def db_connect(db):
 	conn=db.get_connection()
 	mycursor=conn.cursor()
 	return conn,mycursor

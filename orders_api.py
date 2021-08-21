@@ -42,7 +42,7 @@ def orders():
 
             # create order
             try:
-                conn,mycursor=db_connect()
+                conn,mycursor=db_connect(db)
                 session_id=session['id']
                 trip_order=str(request.json['order']).replace("'",'"')
                 mycursor.execute("INSERT INTO orders (number, user_id, trip_order, status) VALUES(%s,%s,%s,1)",(number,session_id,trip_order))
@@ -108,7 +108,7 @@ def get_order(orderNumber):
     else:
         json_data={}
         if orderNumber=='':
-            conn,mycursor=db_connect()
+            conn,mycursor=db_connect(db)
             mycursor.execute('SELECT * FROM orders WHERE user_id=%s',(session["id"],))
             get_all=mycursor.fetchall()
             db_close(conn,mycursor)
@@ -133,7 +133,7 @@ def get_order(orderNumber):
                 json_data['data']=order_list
             # print(json_data)
         else:
-            conn,mycursor=db_connect()
+            conn,mycursor=db_connect(db)
             mycursor.execute('SELECT number, trip_order, status FROM orders WHERE user_id=%s AND number=%s',(session["id"],orderNumber))
             get_one=mycursor.fetchone()
             db_close(conn,mycursor)

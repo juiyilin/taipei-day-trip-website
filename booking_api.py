@@ -24,7 +24,7 @@ def book():
             if request.json['date']=='' or request.json['price']==None:
                 abort(400,'建立失敗')
             try:
-                conn, mycursor=db_connect()
+                conn, mycursor=db_connect(db)
                 mycursor.execute(f'select id,name,address,images from spot where id like {request.json["attractionId"]}')
             except:
                 db_close(conn,mycursor)
