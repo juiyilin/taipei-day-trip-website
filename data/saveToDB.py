@@ -1,5 +1,5 @@
 import mysql.connector 
-from dbconfig import user,password
+from config import user,password
 import json
 
 
