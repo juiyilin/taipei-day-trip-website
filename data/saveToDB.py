@@ -1,4 +1,6 @@
 import mysql.connector 
+import sys
+sys.path.append(r"C:\Users\arthu\Desktop\j2\engineer_project\homework\section2\taipei_travel\taipei-day-trip-website")
 from config import user,password
 import json
 
@@ -21,7 +23,7 @@ for spot in data['result']['results']:
     for img_url in img_str:
         if (img_url.endswith('jpg') or img_url.endswith('png')):
             # print('http'+img_url)
-            images+='http'+img_url+' '
+            images+='https'+img_url+' '
     # print(images)
     insert="INSERT INTO spot (id, name,category,description,address,transport,mrt,latitude,longitude,images) VALUES (%s, %s,%s, %s,%s, %s,%s, %s,%s, %s)"
     value=(spot['RowNumber'],spot['stitle'],spot['CAT2'],spot['xbody'],spot['address'],spot['info'],spot['MRT'],spot['latitude'],spot['longitude'],images)

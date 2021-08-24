@@ -1,6 +1,6 @@
 import mysql.connector 
 import sys
-sys.path.append(r"C:\Users\arthu\Desktop\j2\engineer_project\juiyilin.github.io\homework\section2\flaskvenv\taipei-day-trip-website")
+sys.path.append(r"C:\Users\arthu\Desktop\j2\engineer_project\homework\section2\taipei_travel\taipei-day-trip-website")
 from config import user,password
 print(*sys.path,sep='\n')
 def createDB(cursor,DBname):
