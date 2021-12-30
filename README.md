@@ -1,4 +1,4 @@
-# [旅遊電商網站](http://35.72.79.89:3000/)  
+# 旅遊電商網站
 ![](https://user-images.githubusercontent.com/52588493/122661681-719ceb00-d1bf-11eb-881f-033fc0e95e5a.png)  
 
 ## 資料庫設計  
@@ -14,7 +14,7 @@
 
 網站頁面使用[台北各景點資料](/data/taipei-attractions.json)串接 TapPay 金流服務，佈署於雲端伺服器 AWS EC2，將使用者與訂單資訊儲存於 EC2 上之 MySQL 中，採 RESTful API 架構取得所需資料。  
 
-網址：[http://35.72.79.89:3000/](http://35.72.79.89:3000/)
+網址：[http://35.72.79.89:3000/](http://35.72.79.89:3000/)(已關閉)  
 測試帳號：test@test.test  
 測試密碼：test  
 
